@@ -4,14 +4,15 @@ $('#lg').click(function(e) {
   const email = $('#logEmail').val();
   const password = $('#logPassword').val();
   newpage= this.href;
+
 $.get("/login", {email, password}, function(data) {
   var newWin = window.open(newpage)
+  window.open('login.html', '_self', '');
+    window.close();
   newWin.onload = function(){ 
     var ident = newWin.document.getElementById('eee');
     const content = data.firstName + ' ' + data.lastName;
-    ident.innerHTML = content; 
-    window.open('login.html', '_self', '');
-    window.close();
+    ident.innerHTML = content;
   };
 });
 });
