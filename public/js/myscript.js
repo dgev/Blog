@@ -5,12 +5,13 @@ $('#lg').click(function(e) {
   const password = $('#logPassword').val();
   newpage= this.href;
 $.get("/login", {email, password}, function(data) {
-  window.close ("login.html");
   var newWin = window.open(newpage)
   newWin.onload = function(){ 
     var ident = newWin.document.getElementById('eee');
     const content = data.firstName + ' ' + data.lastName;
-    ident.innerHTML = content;  
+    ident.innerHTML = content; 
+    window.open('login.html', '_self', '');
+    window.close();
   };
 });
 });
