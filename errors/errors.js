@@ -23,12 +23,17 @@ class UserNotFound extends Error {
       super('failed login!');
     }
   }
-  
+  class UserDoesNotHaveAPost extends Error{
+  constructor() {
+    super('The user does not possess the post!');
+  }
+}
   module.exports = {
     UserNotFound,
     UserAlreadyExists,
     PasswordIncorrect,
     ValidationError,
-    UserIsLocked
+    UserIsLocked,
+    UserDoesNotHaveAPost
   }
   
