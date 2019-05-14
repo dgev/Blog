@@ -7,7 +7,10 @@ const bodyParser = require('body-parser');
 const path = process.cwd();
 const {
   //deletePost,
-  createPost
+  createPost,
+  getPosts,
+  getAllPostsOfTheUser,
+  getRecentPosts
   //updatePostTitle
 } = require(`${path}/models/posts.js`);
 // const {
@@ -15,11 +18,41 @@ const {
 // } = require(`${path}/models/users.js`);
 
 router.post('/posts', async function(req, res, next) {
-  
+
   try {
     await createPost(req.body.email, req.body.title, req.body.description);
     res.status(200).end();
   } catch (err) {
+    next(err);
+  }
+})
+
+router.get('/posts', async function(req, res, next) {
+  try{
+  res.send(await getPosts());
+  res.status(200).end();
+  }
+  catch (err) {
+    next(err);
+  }
+})
+
+router.get('/postsByEmail', async function(req, res, next) {
+  try{
+  res.send((await getAllPostsOfTheUser(req.body.email)).posts);
+  res.status(200).end();
+  }
+  catch (err) {
+    next(err);
+  }
+})
+
+router.get('/postsRecent', async function(req, res, next) {
+  try{
+  res.send(await getRecentPosts());
+  res.status(200).end();
+  }
+  catch (err) {
     next(err);
   }
 })
