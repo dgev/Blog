@@ -64,5 +64,6 @@ $('#logout').click(function(e) {
       $('#title').val();
       $('#message').val();
     });
-    $('#reset').reset();
+    $('#title').val('');
+    $('#message').val('');
 })
