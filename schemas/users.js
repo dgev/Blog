@@ -47,7 +47,7 @@ UserSchema.pre('save', function(next) {
 
 UserSchema.statics.getUserByEmail = function(email) {
   console.log(email);
-  
+
   return User.findOne({
     email
   }, {
@@ -103,6 +103,11 @@ UserSchema.statics.deleteLoginCount = function(user) {
     console.log(affected);
   });
 }
+
+UserSchema.statics.getAllPostsOfTheUser = function(email) {
+  return User.findOne({email: email}).populate('posts');
+}
+
 
 // UserSchema.statics.getAllPostsOfTheUser = function(user) {
 //   return User.findOne({email: user.email}).populate(posts);
