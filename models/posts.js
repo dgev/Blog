@@ -2,18 +2,18 @@ const path = process.cwd();
 const User = require(`${path}/schemas/users.js`);
 const Post = require(`${path}/schemas/posts.js`);
 const {
-  getUser,
+  getUser
 } = require(`${path}/models/users.js`);
 
 const {
 UserDoesNotHaveAPost
 } = require(`${path}/errors/errors.js`);
 
-async function createPost(email, title, description) { 
+async function createPost(email, title, description) {
   let user = await User.getUserByEmail(email);
   console.log(user);
   let post = await Post.addPost(title, description);
-   user.posts.push(post);
+   user.posts.push(post._id);
    //console.log(user.posts);
   User.update({
      email: email
@@ -25,6 +25,19 @@ async function createPost(email, title, description) {
    console.log(user.posts);
   }
 
+async function getPosts(){
+  return await Post.getAllPosts();
+}
+
+async function getAllPostsOfTheUser(email){
+  let posts = User.getAllPostsOfTheUser(email);
+  if(posts)
+  return posts;
+  throw new UserDoesNotHaveAPost();
+}
+async function getRecentPosts(){
+  return Post.getRecentPosts();
+}
 
   // async function updatePostTitle(post) {
   //   let user = await User.getUserByEmail(post.email);
@@ -56,7 +69,10 @@ async function createPost(email, title, description) {
   //   // if the user is not found, throw UserNotFound error.
   // }
 module.exports = {
-  createPost
+  createPost,
+  getPosts,
+  getAllPostsOfTheUser,
+  getRecentPosts
   //deletePost,
   //updatePostTitle
 }
