@@ -24,9 +24,13 @@ PostSchema.statics.addPost = function(title, description) {
     return post;
 }
 
-// PostSchema.statics.getAllPosts = function() {
-//   return Post.find({});
-// }
+PostSchema.statics.getAllPosts = function() {
+  return Post.find({});
+}
+
+PostSchema.statics.getRecentPosts = function() {
+ return Post.find({}).sort({ date: -1 }).limit(3);
+}
 
 
 // PostSchema.statics.deletePost = function(post) {
