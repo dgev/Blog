@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const pbkdf2 = require('pbkdf2');
 const Post = require('./posts.js');
 
+
+
 const UserSchema = new mongoose.Schema({
   firstName: {
     type: String,
@@ -27,12 +29,12 @@ const UserSchema = new mongoose.Schema({
   failedLoginCount: Number,
   locked: Number,
   posts: [{
-    validate: {
-        validator: function(v) {
-            return Post.findOne({_id: v});
-        },
-        message: 'invalid post id'
-    },
+    // validate: {
+    //     validator: function(v) {
+    //         return Post.findOne({_id: v});
+    //     },
+    //     message: 'invalid post id'
+    // },
     type: String,
     ref: Post
 }]
@@ -44,6 +46,8 @@ UserSchema.pre('save', function(next) {
 });
 
 UserSchema.statics.getUserByEmail = function(email) {
+  console.log(email);
+  
   return User.findOne({
     email
   }, {
@@ -58,7 +62,7 @@ UserSchema.statics.getUsers = function(filter) {
 }
 
 UserSchema.methods.comparePassword = function(password) {
-   
+
   return this.password === pbkdf2.pbkdf2Sync(password, 'salt', 1, 32, 'sha512').toString('hex');
 }
 
@@ -100,6 +104,28 @@ UserSchema.statics.deleteLoginCount = function(user) {
   });
 }
 
+// UserSchema.statics.getAllPostsOfTheUser = function(user) {
+//   return User.findOne({email: user.email}).populate(posts);
+// }
+
+// UserSchema.statics.deleteUserPost = function(user, post, index) {
+//   User.findOneAndRemove({email: user}, (err, response) => {
+//     // note that if you have populated the Event documents to
+//     // the person documents, you have to extract the id from the
+//     // req.body.eventsAttended object
+//     Post.remove({_id: { $in: req.body.eventsAttended }}, (err, res) => {
+//        return
+//     })
+// })
+// delete user.posts[index]
+//   User.update({
+//     email: user.email
+//   }, {
+//     posts: user.posts
+//   }, function(err, affected, resp) {
+//     console.log(affected);
+//   });
+//}
 const User = mongoose.model('User', UserSchema);
 
 module.exports = User;

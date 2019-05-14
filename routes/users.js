@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const path = process.cwd();
 const {
   login,
-  getUser,
+  //getUser,
   getAllUsers,
   createUser
 } = require(`${path}/models/users.js`);

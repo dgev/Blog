@@ -25,8 +25,6 @@
     <!-- Theme Style -->
     <link rel="stylesheet" href="./css/style.css">
 
-
-
     </head>
   <!-- <body class="bg-light"> -->
 
@@ -88,29 +86,26 @@
             <div class="row">
               <div class="ftco-46">
                 <div class="ftco-46-row d-flex flex-column flex-lg-row">
-                  <div class="ftco-46-image" style="background-image: url(./images/img_1.jpg);"></div>
+                  <div class="ftco-46-image" style="background-image: url(./images/post_1.jfif);"></div>
                   <div class="ftco-46-text ftco-46-arrow-left">
-                    <h4 class="ftco-46-subheading">Vegies</h4>
-                    <h3 class="ftco-46-heading">Beef Empanadas</h3>
-                    <p class="mb-5">Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-                    <p><a href="#" class="btn-link">Learn More <span class="ion-android-arrow-forward"></span></a></p>
+                    <h3 class="ftco-46-heading" id = "post_1"></h3>
+                    <p class="mb-5" id = "p1"></p>
+                    <p><a href="#" class="btn-link">Read More <span class="ion-android-arrow-forward"></span></a></p>
                   </div>
-                  <div class="ftco-46-image" style="background-image: url(./images/img_2.jpg);"></div> 
+                  <div class="ftco-46-image" style="background-image: url(./images/colour.png);"></div> 
                 </div>
 
                 <div class="ftco-46-row d-flex flex-column flex-lg-row">
                   <div class="ftco-46-text ftco-46-arrow-right">
-                    <h4 class="ftco-46-subheading">Food</h4>
-                    <h3 class="ftco-46-heading">Buttermilk Chicken Jibaritos</h3>
-                    <p class="mb-5">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-                    <p><a href="#" class="btn-link">Learn More <span class="ion-android-arrow-forward"></span></a></p>
+                    <h3 class="ftco-46-heading" id = "post_2"></h3>
+                    <p class="mb-5" id = "p2"></p>
+                    <p><a href="#" class="btn-link">Read More <span class="ion-android-arrow-forward"></span></a></p>
                   </div>
-                  <div class="ftco-46-image" style="background-image: url(./images/img_3.jpg);"></div>
+                  <div class="ftco-46-image" style="background-image: url(./images/post_3.jpg);"></div>
                   <div class="ftco-46-text ftco-46-arrow-up">
-                    <h4 class="ftco-46-subheading">Food</h4>
-                    <h3 class="ftco-46-heading">Chicken Chimichurri Croquettes</h3>
-                    <p class="mb-5">Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life.</p>
-                    <p><a href="#" class="btn-link">Learn More <span class="ion-android-arrow-forward"></span></a></p>
+                    <h3 class="ftco-46-heading" id = "post_3"></h3>
+                    <p class="mb-5" id = "p3"></p>
+                    <p><a href="#" class="btn-link">Read More <span class="ion-android-arrow-forward"></span></a></p>
                   </div>
                 </div>
               </div>
@@ -132,12 +127,12 @@
                     <span class="flaticon-soup"></span>
                   </div>
                   <div class="media-body">
-                    <h3>Quality Cuisine</h3>
+                    <h3></h3>
                     <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
                   </div>
                 </div>
               </div>
-              <div class="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="100">
+              <!-- <div class="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="100">
                 <div class="media feature-icon d-block text-center">
                   <div class="icon">
                     <span class="flaticon-vegetables"></span>
@@ -192,8 +187,8 @@
                     <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
                   </div>
                 </div>
-              </div>
-            </div>
+              </div> -->
+            </div> 
             <div class="row justify-content-center">
                 <div class="col-md-4">
                   <input type="submit" class="btn btn-primary btn-outline-primary btn-block" value="Delete">
@@ -211,7 +206,9 @@
             </div>
             <div class="row justify-content-center">
               <div class="col-md-10 p-5 form-wrap">
-                <form action="#">
+                <p>Email: <a href="#section-home" id = "user_email"></a></p>
+                  <hr>
+                <form action="#" id = "reset">
                   <div class="row mb-4">
                     <div class="form-group col-md-4">
                       <label for="name" class="label">Title</label>
@@ -227,7 +224,7 @@
                   </div>
                   <div class="row justify-content-center">
                     <div class="col-md-4">
-                      <input type="submit" class="btn btn-primary btn-outline-primary btn-block" value="Create">
+                      <input type="submit" class="btn btn-primary btn-outline-primary btn-block" id ="create" value="Create">
                     </div>
                   </div>
                 </form>
@@ -266,5 +263,6 @@
     <script src="./js/main.js"></script>
     <script src="./js/myscript.js"></script>
     <script src="jquery.js"></script>
+    <script src="./js/login.js"></script>
   </body>
 </html>

@@ -1,4 +1,7 @@
 /*! Fades out the whole page when clicking links */
+//let userEmail;
+global = window;
+global.usermail = "userX";
 $('#lg').click(function(e) {
   e.preventDefault();
   const email = $('#logEmail').val();
@@ -6,13 +9,13 @@ $('#lg').click(function(e) {
   newpage= this.href;
 
 $.get("/login", {email, password}, function(data) {
-  var newWin = window.open(newpage)
+  let newWin = window.open(newpage)
   window.open('login.html', '_self', '');
     window.close();
   newWin.onload = function(){ 
-    var ident = newWin.document.getElementById('eee');
-    const content = data.firstName + ' ' + data.lastName;
-    ident.innerHTML = content;
+    let ident = newWin.document.getElementById('eee');
+    ident.innerHTML = data.firstName + ' ' + data.lastName; 
+    newWin.document.getElementById('user_email').innerHTML = data.email;
   };
 });
 });
@@ -50,3 +53,16 @@ $('#logout').click(function(e) {
 
       });
   })
+
+  $('#create').click(function(event) {
+    event.preventDefault();
+    const email = document.getElementById("user_email").textContent;
+    const title = $('#title').val();
+    const description = $('#message').val();
+    $.post("/posts", { email, title, description},  function(data) {
+      document.getElementById("user_email").textContent;
+      $('#title').val();
+      $('#message').val();
+    });
+    $('#reset').reset();
+})

@@ -20,6 +20,7 @@ const {
   
 
 app.use('/', require('./routes/users.js'));
+app.use('/', require('./routes/posts.js'));
 
 //const multer = require('multer');
 
