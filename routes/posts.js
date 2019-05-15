@@ -10,7 +10,8 @@ const {
   createPost,
   getPosts,
   getAllPostsOfTheUser,
-  getRecentPosts
+  getRecentPosts,
+  getPostByID
   //updatePostTitle
 } = require(`${path}/models/posts.js`);
 // const {
@@ -56,6 +57,18 @@ router.get('/postsRecent', async function(req, res, next) {
     next(err);
   }
 })
+
+router.get('/postByID', async function(req, res, next) {
+  console.log(req.body);  
+  try{   
+  res.send(await getPostByID(req.body._id));
+  res.status(200).end();
+  }
+  catch (err) {
+    next(err);
+  }
+})
+
 //
 // router.post('/deletePost', async function(req, res, next) {
 //

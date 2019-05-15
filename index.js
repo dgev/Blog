@@ -38,6 +38,10 @@ app.get('/index.html', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'pages/index.html'))
 })
 
+app.get('/post.html', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'pages/post.html'))
+})
+
 app.use(function(err, req, res, next) {
     if (err.message === new UserNotFound().message) {
       res.status(404).send('User with that username was not found!');

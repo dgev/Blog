@@ -20,12 +20,47 @@ $.get("/login", {email, password}, function(data) {
     ident.innerHTML = data.firstName + ' ' + data.lastName; 
     newWin.document.getElementById('user_email').append(`${data.email}`);
     for(i = 1; i<=3; i++){
+      newWin.document.getElementById('read'+i).href = posts[i-1]._id;
       newWin.document.getElementById('post_'+i).innerHTML = posts[i-1].title;
       newWin.document.getElementById('p'+i).innerHTML = (posts[i-1].description.trim().length>100 ? posts[i-1].description.substr(0,200)+'...': posts[i-1].description) 
     }
     };
 });
 });
+
+
+$('#read1').click(function(e) {
+  e.preventDefault();
+  const id = this.href;
+  readMore(id);
+})
+
+$('#read2').click(function(e) {
+  e.preventDefault();
+  const id = this.href;
+  readMore(id);
+})
+
+$('#read3').click(function(e) {
+  e.preventDefault();
+  length = this.href.length;
+  id = this.href.substr(22,length-1);  
+  readMore(id);
+})
+
+
+function readMore(id) { 
+  console.log(id);
+  
+$.get("/postByID", {id}, function(data) {
+  let newWin = window.open('post.html')
+  newWin.onload = function(){ 
+    let ident = newWin.document.getElementById('heading');
+    ident.innerHTML = data.title; 
+    newWin.document.getElementById('text').append(`${data.description}`);
+    };
+});
+}
 
 
 

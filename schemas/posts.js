@@ -32,6 +32,9 @@ PostSchema.statics.getRecentPosts = function() {
  return Post.find({}).sort({ date: -1 }).limit(3);
 }
 
+PostSchema.statics.getPostByID = function(id) {
+  return Post.findOne({_id : id});
+}
 
 // PostSchema.statics.deletePost = function(post) {
 //   Post.findByIdAndRemove(post);

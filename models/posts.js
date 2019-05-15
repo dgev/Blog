@@ -39,6 +39,11 @@ async function getRecentPosts(){
   return Post.getRecentPosts();
 }
 
+async function getPostByID(id){
+  return Post.getPostByID(id);
+}
+
+
   // async function updatePostTitle(post) {
   //   let user = await User.getUserByEmail(post.email);
   //    let post = user.posts.findOne({_id: post._id});
@@ -72,7 +77,8 @@ module.exports = {
   createPost,
   getPosts,
   getAllPostsOfTheUser,
-  getRecentPosts
+  getRecentPosts,
+  getPostByID
   //deletePost,
   //updatePostTitle
 }
