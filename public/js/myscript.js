@@ -1,12 +1,15 @@
 /*! Fades out the whole page when clicking links */
-//let userEmail;
-global = window;
-global.usermail = "userX";
+
+
 $('#lg').click(function(e) {
   e.preventDefault();
   const email = $('#logEmail').val();
   const password = $('#logPassword').val();
+  let posts = new Array();
   newpage= this.href;
+  $.get("/postsRecent", {}, function(data) {
+    posts = data; 
+  });
 
 $.get("/login", {email, password}, function(data) {
   let newWin = window.open(newpage)
@@ -15,10 +18,48 @@ $.get("/login", {email, password}, function(data) {
   newWin.onload = function(){ 
     let ident = newWin.document.getElementById('eee');
     ident.innerHTML = data.firstName + ' ' + data.lastName; 
-    newWin.document.getElementById('user_email').innerHTML = data.email;
-  };
+    newWin.document.getElementById('user_email').append(`${data.email}`);
+    for(i = 1; i<=3; i++){
+      newWin.document.getElementById('post_'+i).innerHTML = posts[i-1].title;
+      newWin.document.getElementById('p'+i).innerHTML = (posts[i-1].description.trim().length>100 ? posts[i-1].description.substr(0,200)+'...': posts[i-1].description) 
+    }
+    };
 });
 });
+
+
+
+// function load() {
+//   const email = $('#logEmail').val();
+//   const password = $('#logPassword').val();
+//   $.get("/login", {email, password}, function(data) {
+//   let newWin = window.open('index.html')
+//   window.open('login.html', '_self', '');
+//     window.close();
+//   newWin.onload = function(){ 
+//     let ident = newWin.document.getElementById('eee');
+//     ident.innerHTML = data.firstName + ' ' + data.lastName; 
+//     newWin.document.getElementById('user_email').innerHTML = data.email;
+//     };
+// });
+// }
+
+// $('#del').click(function(e) {
+//   e.preventDefault();
+//   $.get("/postsRecent", {}, function(data) {
+//     document.getElementById('post_4').innerHTML = data[0].title; 
+//     document.getElementById('p4').innerHTML = data[0].description;
+//     console.log(data[0]);    
+//   });
+// });
+
+// function recent(){
+//   $.get("/postsRecent", {}, function(data) {
+//     document.getElementById('post_1').innerHTML = data[0].title; 
+//     document.getElementById('p1').innerHTML = data[0].description;
+//     console.log(data[0]);    
+//   });
+// }
 
 /*! Fades out the whole page when clicking links */
 $('#logout').click(function(e) {
@@ -67,3 +108,5 @@ $('#logout').click(function(e) {
     $('#title').val('');
     $('#message').val('');
 })
+
+

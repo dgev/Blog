@@ -48,7 +48,7 @@ router.get('/postsByEmail', async function(req, res, next) {
 })
 
 router.get('/postsRecent', async function(req, res, next) {
-  try{
+  try{   
   res.send(await getRecentPosts());
   res.status(200).end();
   }
