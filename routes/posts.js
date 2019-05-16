@@ -39,8 +39,9 @@ router.get('/posts', async function(req, res, next) {
 })
 
 router.get('/postsByEmail', async function(req, res, next) {
+ 
   try{
-  res.send((await getAllPostsOfTheUser(req.body.email)).posts);
+  res.send((await getAllPostsOfTheUser(req.query.email)).posts);
   res.status(200).end();
   }
   catch (err) {
@@ -59,9 +60,10 @@ router.get('/postsRecent', async function(req, res, next) {
 })
 
 router.get('/postByID', async function(req, res, next) {
-  console.log(req.body);  
+    console.log((req.query._id));
+  
   try{   
-  res.send(await getPostByID(req.body._id));
+  res.send(await getPostByID(req.query._id));
   res.status(200).end();
   }
   catch (err) {

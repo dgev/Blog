@@ -6,9 +6,13 @@ $('#lg').click(function(e) {
   const email = $('#logEmail').val();
   const password = $('#logPassword').val();
   let posts = new Array();
+  let personal_posts = new Array();
   newpage= this.href;
   $.get("/postsRecent", {}, function(data) {
     posts = data; 
+  });
+  $.get("/postsByEmail", {email}, function(data) {
+    personal_posts = data; 
   });
 
 $.get("/login", {email, password}, function(data) {
@@ -24,6 +28,16 @@ $.get("/login", {email, password}, function(data) {
       newWin.document.getElementById('post_'+i).innerHTML = posts[i-1].title;
       newWin.document.getElementById('p'+i).innerHTML = (posts[i-1].description.trim().length>100 ? posts[i-1].description.substr(0,200)+'...': posts[i-1].description) 
     }
+    personal_posts.forEach(function(element) {
+      let blog = newWin.document.createElement("DIV");
+      let title = newWin.document.createElement("H3");
+      let body = newWin.document.createElement("P");
+      title.innerHTML = element.title;
+      body.innerHTML = element.description;
+      blog.appendChild(title); 
+      blog.appendChild(body);                            
+      newWin.document.getElementById("personalBG").appendChild(blog);
+    });
     };
 });
 });
@@ -31,13 +45,15 @@ $.get("/login", {email, password}, function(data) {
 
 $('#read1').click(function(e) {
   e.preventDefault();
-  const id = this.href;
+  length = this.href.length;
+  id = this.href.substr(22,length-1);  
   readMore(id);
 })
 
 $('#read2').click(function(e) {
   e.preventDefault();
-  const id = this.href;
+  length = this.href.length;
+  id = this.href.substr(22,length-1);  
   readMore(id);
 })
 
@@ -49,10 +65,9 @@ $('#read3').click(function(e) {
 })
 
 
-function readMore(id) { 
-  console.log(id);
-  
-$.get("/postByID", {id}, function(data) {
+function readMore(_id) { 
+
+$.get("/postByID", {_id}, function(data) {
   let newWin = window.open('post.html')
   newWin.onload = function(){ 
     let ident = newWin.document.getElementById('heading');
