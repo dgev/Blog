@@ -12,7 +12,7 @@ $('#lg').click(function(e) {
     posts = data; 
   });
   $.get("/postsByEmail", {email}, function(data) {
-    personal_posts = data; 
+    personal_posts = data;     
   });
 
 $.get("/login", {email, password}, function(data) {
@@ -29,6 +29,8 @@ $.get("/login", {email, password}, function(data) {
       newWin.document.getElementById('p'+i).innerHTML = (posts[i-1].description.trim().length>100 ? posts[i-1].description.substr(0,200)+'...': posts[i-1].description) 
     }
     personal_posts.forEach(function(element) {
+      console.log(element.title);
+      
       let blog = newWin.document.createElement("DIV");
       let title = newWin.document.createElement("H3");
       let body = newWin.document.createElement("P");
