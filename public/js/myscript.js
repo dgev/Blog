@@ -34,6 +34,7 @@ $.get("/login", {email, password}, function(data) {
       let blog = newWin.document.createElement("DIV");
       let title = newWin.document.createElement("H3");
       let body = newWin.document.createElement("P");
+      //blog.append('<input type="checkbox" ' + 'VisibleCheckbox" name="'  + "remove"+ 'VisibleCheckbox" >')
       title.innerHTML = element.title;
       body.innerHTML = element.description;
       blog.appendChild(title); 
@@ -152,13 +153,50 @@ $('#logout').click(function(e) {
     const email = document.getElementById("user_email").textContent;
     const title = $('#title').val();
     const description = $('#message').val();
+    // $.ajax("/posts",{ email, title, description},  function(data) {
+    //   document.getElementById("user_email").textContent;
+    //   $('#title').val();
+    //   $('#message').val();
+    // });
+    // $('#title').val('');
+    // $('#message').val('');
+
+    // });    
+
     $.post("/posts", { email, title, description},  function(data) {
       document.getElementById("user_email").textContent;
       $('#title').val();
       $('#message').val();
     });
+    let blog = document.createElement("DIV");
+        let blog_title = document.createElement("H3");
+        let body = document.createElement("P");
+        blog_title.innerHTML = title;
+        body.innerHTML = description;
+        blog.appendChild(blog_title); 
+        blog.appendChild(body);                            
+        document.getElementById("personalBG").appendChild(blog);
     $('#title').val('');
     $('#message').val('');
-})
+    $.get("/postsRecent", {}, function(data) {
+    for(i = 1; i<=3; i++){
+        document.getElementById('read'+i).href = data[i-1]._id;
+        document.getElementById('post_'+i).innerHTML = data[i-1].title;
+        document.getElementById('p'+i).innerHTML = (data[i-1].description.trim().length>100 ? data[i-1].description.substr(0,200)+'...': data[i-1].description) 
+      }
+    });
+    // $.get("/savedPost", {email}, function(data) {
+          
+    //     let blog = document.createElement("DIV");
+    //     let title = document.createElement("H3");
+    //     let body = document.createElement("P");
+    //     title.innerHTML = data.title;
+    //     body.innerHTML = data.description;
+    //     blog.appendChild(title); 
+    //     blog.appendChild(body);                            
+    //     document.getElementById("personalBG").appendChild(blog);
+    //   });     
+    });
+
 
 
