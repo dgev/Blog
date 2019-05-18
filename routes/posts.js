@@ -11,12 +11,19 @@ const {
   getPosts,
   getAllPostsOfTheUser,
   getRecentPosts,
+<<<<<<< HEAD
   getPostByID
   //updatePostTitle
 } = require(`${path}/models/posts.js`);
 // const {
 //   updatePostTitle
 // } = require(`${path}/models/users.js`);
+=======
+  getPostByID,
+  updatePostTitle,
+  updatePostDescription
+} = require(`${path}/models/posts.js`);
+>>>>>>> origin/master
 
 router.post('/posts', async function(req, res, next) {
 
@@ -76,12 +83,17 @@ router.post('/deletePost', async function(req, res, next) {
 
   try {
   //  console.log(req.body);
+<<<<<<< HEAD
     await deletePost(req.body._id);
+=======
+    await deletePost(req.body.email, req.body._id);
+>>>>>>> origin/master
     res.status(200).end();
   } catch (err) {
     next(err);
   }
 })
+<<<<<<< HEAD
 // router.post('/updateTitle', async function(req, res, next) {
 //
 //   try {
@@ -124,6 +136,31 @@ router.post('/deletePost', async function(req, res, next) {
 //     next(err)
 //   }
 // })
+=======
+
+router.post('/updateTitle', async function(req, res, next) {
+
+  try {
+  //  console.log(req.body);
+    await updatePostTitle(req.body._id, req.body.title);
+    res.status(200).end();
+  } catch (err) {
+    next(err);
+  }
+})
+
+router.post('/updateDescription', async function(req, res, next) {
+
+  try {
+  //  console.log(req.body);
+    await updatePostDescription(req.body._id, req.body.description);
+    res.status(200).end();
+  } catch (err) {
+    next(err);
+  }
+})
+
+>>>>>>> origin/master
 
 
 module.exports = router;

@@ -36,6 +36,7 @@ PostSchema.statics.getPostByID = function(id) {
   return Post.findOne({_id : id});
 }
 
+<<<<<<< HEAD
 PostSchema.statics.deleteThePost = function(post) {
     Post.deleteMany({_id: post}, function(err, affected, resp) {
       console.log(affected);
@@ -64,3 +65,33 @@ PostSchema.statics.deleteThePost = function(post) {
 const Post = mongoose.model('Post', PostSchema);
 
 module.exports = Post;
+=======
+PostSchema.statics.deleteThePost = function(id) {
+    Post.deleteMany({_id: id}, function(err, affected, resp) {
+      console.log(affected);
+    });
+}
+PostSchema.methods.updateTitle = function(title) {
+  Post.update({
+    _id: this._id
+  }, {
+    title: title
+  }, function(err, affected, resp) {
+    console.log(affected);
+  });
+}
+
+PostSchema.methods.updateDescription = function(description) {
+  Post.update({
+    _id: this._id
+  }, {
+    description: description
+  }, function(err, affected, resp) {
+    console.log(affected);
+  });
+}
+
+const Post = mongoose.model('Post', PostSchema);
+
+module.exports = Post;
+>>>>>>> origin/master
