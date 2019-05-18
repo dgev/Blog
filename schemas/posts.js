@@ -42,26 +42,6 @@ PostSchema.statics.deleteThePost = function(post) {
       console.log(affected);
     });
 }
-// PostSchema.statics.editPostTitle = function(post) {
-//   this.update({
-//     _id: post._id
-//   }, {
-//     title: this.title
-//   }, function(err, affected, resp) {
-//     console.log(affected);
-//   });
-// }
-//
-// PostSchema.statics.editPostDescription = function(post) {
-//   this.update({
-//     _id: post._id
-//   }, {
-//     title: this.description
-//   }, function(err, affected, resp) {
-//     console.log(affected);
-//   });
-// }
-
 PostSchema.statics.deleteThePost = function(id) {
     Post.deleteMany({_id: id}, function(err, affected, resp) {
       console.log(affected);

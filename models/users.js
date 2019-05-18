@@ -14,14 +14,14 @@ const maximum_allowed_wrong_passwords = process.env.maximum_allowed_wrong_passwo
 
 
 async function login(email, password) {
-  
+
   const user = await User.ﬁndUserForLogin(email);
- 
+
   if (user === null || user.length === 0) {
     throw new UserNotFound();
   }
   const result = await user.comparePassword(password);
- 
+
   if (user.locked) {
     throw new UserIsLocked();
   }
@@ -57,12 +57,13 @@ async function createUser(body) {
 
   try {
     console.log(body.password);
-    
+
     const user = await new User({
       email: body.email,
       firstName: body.name,
       lastName: body.lastName,
       password: body.password,
+      posts: [],
       failedLoginCount: 0,
       locked: 0
     });
@@ -86,4 +87,3 @@ module.exports = {
   getAllUsers,
   createUser
 }
-

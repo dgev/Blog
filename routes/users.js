@@ -7,7 +7,6 @@ const bodyParser = require('body-parser');
 const path = process.cwd();
 const {
   login,
-  //getUser,
   getUser,
   getAllUsers,
   createUser
@@ -32,16 +31,6 @@ router.get('/users', async function(req, res, next) {
   }
 })
 
-// router.get('/users/:email', async function(req, res, next) {
-//   try {
-//     const user = await getUser(req.params.email);
-//     res.json(user);
-//     res.status(200).end();
-//   } catch (err) {
-//     console.log(err.message);
-//     next(err);
-//   }
-// })
 router.get('/UserByEmail', async function(req, res, next) {
   try {
     const user = await getUser(req.query.email);

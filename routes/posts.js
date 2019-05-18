@@ -80,48 +80,7 @@ router.post('/deletePost', async function(req, res, next) {
     next(err);
   }
 })
-// router.post('/updateTitle', async function(req, res, next) {
-//
-//   try {
-//   //  console.log(req.body);
-//     await updatePostTitle(req.body);
-//     res.status(200).end();
-//   } catch (err) {
-//     next(err);
-//   }
-// })
 
-//
-// router.get('/users', async function(req, res, next) {
-//   try {
-//     const users = await getAllUsers();
-//     res.json(users);
-//   } catch (err) {
-//     next(err);
-//   }
-// })
-
-// router.get('/users/:email', async function(req, res, next) {
-//   try {
-//     const user = await getUser(req.params.email);
-//     res.json(user);
-//     res.status(200).end();
-//   } catch (err) {
-//     console.log(err.message);
-//     next(err);
-//   }
-// })
-
-// router.get('/login', async function(req, res, next) {
-//   try {
-//
-//     const user = await login(req.query.email, req.query.password);
-//     res.json(user);
-//     res.status(200).end();
-//   } catch (err) {
-//     next(err)
-//   }
-// })
 router.post('/updateTitle', async function(req, res, next) {
 
   try {
