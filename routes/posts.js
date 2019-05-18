@@ -6,17 +6,15 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const path = process.cwd();
 const {
-  //deletePost,
+  deletePost,
   createPost,
   getPosts,
   getAllPostsOfTheUser,
   getRecentPosts,
-  getPostByID
-  //updatePostTitle
+  getPostByID,
+  updatePostTitle,
+  updatePostDescription
 } = require(`${path}/models/posts.js`);
-// const {
-//   updatePostTitle
-// } = require(`${path}/models/users.js`);
 
 router.post('/posts', async function(req, res, next) {
 
@@ -72,60 +70,39 @@ router.get('/postByID', async function(req, res, next) {
   }
 })
 
-//
-// router.post('/deletePost', async function(req, res, next) {
-//
-//   try {
-//   //  console.log(req.body);
-//     await deletePost(req.body.email, req.body._id);
-//     res.status(200).end();
-//   } catch (err) {
-//     next(err);
-//   }
-// })
-//
-// router.post('/updateTitle', async function(req, res, next) {
-//
-//   try {
-//   //  console.log(req.body);
-//     await updatePostTitle(req.body);
-//     res.status(200).end();
-//   } catch (err) {
-//     next(err);
-//   }
-// })
+router.post('/deletePost', async function(req, res, next) {
 
-//
-// router.get('/users', async function(req, res, next) {
-//   try {
-//     const users = await getAllUsers();
-//     res.json(users);
-//   } catch (err) {
-//     next(err);
-//   }
-// })
+  try {
+  //  console.log(req.body);
+    await deletePost(req.body.email, req.body._id);
+    res.status(200).end();
+  } catch (err) {
+    next(err);
+  }
+})
 
-// router.get('/users/:email', async function(req, res, next) {
-//   try {
-//     const user = await getUser(req.params.email);
-//     res.json(user);
-//     res.status(200).end();
-//   } catch (err) {
-//     console.log(err.message);
-//     next(err);
-//   }
-// })
+router.post('/updateTitle', async function(req, res, next) {
 
-// router.get('/login', async function(req, res, next) {
-//   try {
-//
-//     const user = await login(req.query.email, req.query.password);
-//     res.json(user);
-//     res.status(200).end();
-//   } catch (err) {
-//     next(err)
-//   }
-// })
+  try {
+  //  console.log(req.body);
+    await updatePostTitle(req.body._id, req.body.title);
+    res.status(200).end();
+  } catch (err) {
+    next(err);
+  }
+})
+
+router.post('/updateDescription', async function(req, res, next) {
+
+  try {
+  //  console.log(req.body);
+    await updatePostDescription(req.body._id, req.body.description);
+    res.status(200).end();
+  } catch (err) {
+    next(err);
+  }
+})
+
 
 
 module.exports = router;
