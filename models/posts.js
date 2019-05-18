@@ -11,26 +11,6 @@ UserDoesNotHaveAPost
 
 async function createPost(email, title, description) {
   let user = await User.getUserByEmail(email);
-<<<<<<< HEAD
-  console.log(user);
-  let post = await Post.addPost(title, description);
-   user.posts.push(post._id);
-   //console.log(user.posts);
-  User.update({
-     email: email
-   },{
-     posts: user.posts
-   }, function(err, affected, resp) {
-     console.log(affected);
-   });
-   console.log(user.posts);
-  }
-
-async function deletePost(post) {
-      await Post.deleteThePost(post);
-    }
-
-=======
   let post = await Post.addPost(title, description);
   user.posts.push({_id: post._id});
   await user.updateForDeleteCreate(user.posts);
@@ -42,7 +22,6 @@ async function deletePost(email, post) {
       await user.updateForDeleteCreate(user.posts);
       await Post.deleteThePost(post);
 }
->>>>>>> origin/master
 
 async function getPosts(){
   return await Post.getAllPosts();
@@ -62,7 +41,6 @@ async function getPostByID(id){
   return Post.getPostByID(id);
 }
 
-<<<<<<< HEAD
 
   // async function updatePostTitle(post) {
   //   let user = await User.getUserByEmail(post.email);
@@ -93,7 +71,7 @@ async function getPostByID(id){
   //   // Call corresponding schema function to retrieve the user and return the result.
   //   // if the user is not found, throw UserNotFound error.
   // }
-=======
+
 async function updatePostTitle(id, title) {
   (await Post.getPostByID(id)).updateTitle(title);
 }
@@ -102,19 +80,14 @@ async function updatePostDescription(id, description) {
   (await Post.getPostByID(id)).updateDescription(description);
 }
 
->>>>>>> origin/master
+
 module.exports = {
   createPost,
   getPosts,
   getAllPostsOfTheUser,
   getRecentPosts,
   getPostByID,
-<<<<<<< HEAD
-  deletePost
-  //updatePostTitle
-=======
   deletePost,
   updatePostTitle,
   updatePostDescription
->>>>>>> origin/master
 }

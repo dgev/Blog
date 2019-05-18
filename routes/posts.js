@@ -11,19 +11,10 @@ const {
   getPosts,
   getAllPostsOfTheUser,
   getRecentPosts,
-<<<<<<< HEAD
-  getPostByID
-  //updatePostTitle
-} = require(`${path}/models/posts.js`);
-// const {
-//   updatePostTitle
-// } = require(`${path}/models/users.js`);
-=======
   getPostByID,
   updatePostTitle,
   updatePostDescription
 } = require(`${path}/models/posts.js`);
->>>>>>> origin/master
 
 router.post('/posts', async function(req, res, next) {
 
@@ -46,9 +37,9 @@ router.get('/posts', async function(req, res, next) {
 })
 
 router.get('/postsByEmail', async function(req, res, next) {
- 
+
   try{
-     
+
   res.send((await getAllPostsOfTheUser(req.query.email)).posts);
   res.status(200).end();
   }
@@ -58,7 +49,7 @@ router.get('/postsByEmail', async function(req, res, next) {
 })
 
 router.get('/postsRecent', async function(req, res, next) {
-  try{   
+  try{
   res.send(await getRecentPosts());
   res.status(200).end();
   }
@@ -69,8 +60,8 @@ router.get('/postsRecent', async function(req, res, next) {
 
 router.get('/postByID', async function(req, res, next) {
     console.log((req.query._id));
-  
-  try{   
+
+  try{
   res.send(await getPostByID(req.query._id));
   res.status(200).end();
   }
@@ -83,17 +74,12 @@ router.post('/deletePost', async function(req, res, next) {
 
   try {
   //  console.log(req.body);
-<<<<<<< HEAD
     await deletePost(req.body._id);
-=======
-    await deletePost(req.body.email, req.body._id);
->>>>>>> origin/master
     res.status(200).end();
   } catch (err) {
     next(err);
   }
 })
-<<<<<<< HEAD
 // router.post('/updateTitle', async function(req, res, next) {
 //
 //   try {
@@ -136,8 +122,6 @@ router.post('/deletePost', async function(req, res, next) {
 //     next(err)
 //   }
 // })
-=======
-
 router.post('/updateTitle', async function(req, res, next) {
 
   try {
@@ -160,7 +144,6 @@ router.post('/updateDescription', async function(req, res, next) {
   }
 })
 
->>>>>>> origin/master
 
 
 module.exports = router;

@@ -7,11 +7,8 @@ const bodyParser = require('body-parser');
 const path = process.cwd();
 const {
   login,
-<<<<<<< HEAD
   //getUser,
-=======
   getUser,
->>>>>>> origin/master
   getAllUsers,
   createUser
 } = require(`${path}/models/users.js`);
@@ -35,7 +32,6 @@ router.get('/users', async function(req, res, next) {
   }
 })
 
-<<<<<<< HEAD
 // router.get('/users/:email', async function(req, res, next) {
 //   try {
 //     const user = await getUser(req.params.email);
@@ -46,7 +42,6 @@ router.get('/users', async function(req, res, next) {
 //     next(err);
 //   }
 // })
-=======
 router.get('/UserByEmail', async function(req, res, next) {
   try {
     const user = await getUser(req.query.email);
@@ -57,7 +52,6 @@ router.get('/UserByEmail', async function(req, res, next) {
     next(err);
   }
 })
->>>>>>> origin/master
 
 router.get('/login', async function(req, res, next) {
   try {
@@ -72,7 +66,3 @@ router.get('/login', async function(req, res, next) {
 
 
 module.exports = router;
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master

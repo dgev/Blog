@@ -28,21 +28,13 @@ const UserSchema = new mongoose.Schema({
   },
   failedLoginCount: Number,
   locked: Number,
-<<<<<<< HEAD
-  posts: [{
-=======
   posts: [{type: 'ObjectId',
->>>>>>> origin/master
     // validate: {
     //     validator: function(v) {
     //         return Post.findOne({_id: v});
     //     },
     //     message: 'invalid post id'
     // },
-<<<<<<< HEAD
-    type: String,
-=======
->>>>>>> origin/master
     ref: Post
 }]
 });
@@ -115,7 +107,6 @@ UserSchema.statics.getAllPostsOfTheUser = function(email) {
   return User.findOne({email: email}).populate('posts');
 }
 
-<<<<<<< HEAD
 
 // UserSchema.statics.getAllPostsOfTheUser = function(user) {
 //   return User.findOne({email: user.email}).populate(posts);
@@ -139,10 +130,6 @@ UserSchema.statics.getAllPostsOfTheUser = function(email) {
 //     console.log(affected);
 //   });
 //}
-const User = mongoose.model('User', UserSchema);
-
-module.exports = User;
-=======
 UserSchema.methods.updateForDeleteCreate = function(posts) {
   User.update({
      email: this.email
@@ -157,4 +144,3 @@ UserSchema.methods.updateForDeleteCreate = function(posts) {
 const User = mongoose.model('User', UserSchema);
 
 module.exports = User;
->>>>>>> origin/master
