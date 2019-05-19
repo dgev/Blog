@@ -3,7 +3,7 @@
  let email = sessionStorage.getItem("email");
  //let personal_posts = new Array();
  console.log(email);
- 
+
 if (email) {
  // Set name, lastaname to page
 $.get("/UserByEmail", {email}, function(data) {
@@ -40,18 +40,18 @@ $.get("/postsByEmail", {email}, function(data) {
       body.style. marginBottom = '50px';
       button.style.width = '200px';
      updateButton.style.width = '200px';
-     button.innerHTML = "Delete"; 
-     updateButton.innerHTML = "Update";     
+     button.innerHTML = "Delete";
+     updateButton.innerHTML = "Update";
      button.setAttribute("class", "btn btn-primary btn-outline-primary btn-block");
      updateButton.setAttribute("class", "btn btn-primary btn-outline-primary btn-block");
-      blog.setAttribute("id", element._id + 0); 
-      title.setAttribute("id", element._id + 1); 
-      body.setAttribute("id", element._id + 2); 
+      blog.setAttribute("id", element._id + 0);
+      title.setAttribute("id", element._id + 1);
+      body.setAttribute("id", element._id + 2);
      button.setAttribute("id", element._id);
       updateButton.setAttribute("id", "u" + element._id);
-      button.onclick = function Delete(){  
+      button.onclick = function Delete(){
         let _id = this.id;
-        $.post('/deletePost', {_id}, function(data) {
+        $.post('/deletePost', {email, _id}, function(data) {
             });
             document.getElementById(_id+1).innerHTML = '';
             document.getElementById(_id+2).innerHTML = '';
@@ -59,11 +59,11 @@ $.get("/postsByEmail", {email}, function(data) {
             button.parentNode.removeChild(button);
             button = document.getElementById("u"+_id);
             button.parentNode.removeChild(button);
-        
-       };  
-      // updateButton.onclick = function Update(){ 
+
+       };
+      // updateButton.onclick = function Update(){
       //   let length = this.id.length;
-      //   let _id = this.id.substr(1,length-1); 
+      //   let _id = this.id.substr(1,length-1);
       //   let blog = document.getElementById(_id+0);
       //   let title = document.getElementById(_id+1);
       //   let body = document.getElementById(_id+2);
@@ -72,11 +72,11 @@ $.get("/postsByEmail", {email}, function(data) {
       //   input.type = "text";
       //   input.style. marginTop = '50px';
       //   input.setAttribute("id", "updateTitle");
-      //   input.className = "label"; 
+      //   input.className = "label";
       //   let textarea = document.createElement("textarea");
-      //   textarea.setAttribute("id", "updateBody"); 
-      //   textarea.setAttribute("cols", "30"); 
-      //   textarea.setAttribute("rows", "10"); 
+      //   textarea.setAttribute("id", "updateBody");
+      //   textarea.setAttribute("cols", "30");
+      //   textarea.setAttribute("rows", "10");
       //   textarea.className = "form-control";
       //   input.value = title.textContent;
       //   textarea.innerHTML = body.textContent;
@@ -99,16 +99,16 @@ $.get("/postsByEmail", {email}, function(data) {
         // div1.appendChild(div4);
         // blog.appendChild(div1);
         // let submitButton = document.createElement("button");
-     
+
         // submitButton.innerHTML = "Submit";
-        // submitButton.style.width = '200px';     
+        // submitButton.style.width = '200px';
         // submitButton.setAttribute("class", "btn btn-primary btn-outline-primary btn-block");
         // submitButton.setAttribute("id", "submit_update");
-        // blog.appendChild(submitButton); 
-      //  submitButton.onclick = function Submit(){         
+        // blog.appendChild(submitButton);
+      //  submitButton.onclick = function Submit(){
       //       const title = $('#updateTitle').val();
       //       const description = $('#updateBody').val();
-            
+
     //          $.post("/posts", { email, title, description},  function(data) {
     //            document.getElementById("user_email").textContent;
     //            $('#title').val();
@@ -122,14 +122,14 @@ $.get("/postsByEmail", {email}, function(data) {
     //              blog_title.style. marginBottom = '50px';
     //              body.style. marginBottom = '50px';
     //              button.style.width = '200px';
-    //              button.innerHTML = "Delete";     
+    //              button.innerHTML = "Delete";
     //              button.setAttribute("class", "btn btn-primary btn-outline-primary btn-block" + "delete");
     //              button.setAttribute("id", element._id);
     //              blog_title.innerHTML = title;
     //             body.innerHTML = description;
     //             blog.appendChild(blog_title);
     //             blog.appendChild(body);
-    //             blog.appendChild(button); 
+    //             blog.appendChild(button);
     //             document.getElementById("personalBG").appendChild(blog);
     //         $('#title').val('');
     //         $('#message').val('');
@@ -139,14 +139,14 @@ $.get("/postsByEmail", {email}, function(data) {
     //             document.getElementById('post_'+i).innerHTML = data[i-1].title;
     //             document.getElementById('p'+i).innerHTML = (data[i-1].description.trim().length>100 ? data[i-1].description.substr(0,200)+'...': data[i-1].description)
     //           }
-    //     })        
+    //     })
       blog.appendChild(title);
       blog.appendChild(body);
-      blog.appendChild(button); 
-      blog.appendChild(updateButton); 
+      blog.appendChild(button);
+      blog.appendChild(updateButton);
       document.getElementById("personalBG").appendChild(blog);
     // };
-    
+
 //    };
 });
 });
@@ -258,14 +258,14 @@ $('#logout').click(function(e) {
         blog_title.style. marginBottom = '50px';
         body.style. marginBottom = '50px';
         button.style.width = '200px';
-        button.innerHTML = "Delete";     
+        button.innerHTML = "Delete";
         button.setAttribute("class", "btn btn-primary btn-outline-primary btn-block" + "delete");
         //button.setAttribute("id", element._id);
         blog_title.innerHTML = title;
         body.innerHTML = description;
         blog.appendChild(blog_title);
         blog.appendChild(body);
-        blog.appendChild(button); 
+        blog.appendChild(button);
         document.getElementById("personalBG").appendChild(blog);
     $('#title').val('');
     $('#message').val('');
