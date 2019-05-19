@@ -14,22 +14,23 @@ PostDoesNotExist
 
 async function createPost(email, title, description) {
   try{
-     let user = await User.getUser(email);
+     let user = await getUser(email);
+     console.log(user);
      let post = await Post.addPost(title, description);
+     console.log(post);
      user.posts.push({_id: post._id});
      await user.updateForDeleteCreate(user.posts);
-    }
+   }
     catch(err){
-      if (err.message.includes('is required.'))
-        throw new FieldIsRequired();
-      }
+     if (err.message.includes('is required.'))
+       throw new FieldIsRequired();
       throw err;
     }
-
+}
 
 async function deletePost(email, post) {
     try{
-      let user = await User.getUser(email);
+      let user = await getUser(email);
       user.posts.pull(post);
       await user.updateForDeleteCreate(user.posts);
       await Post.deleteThePost(post);
@@ -44,15 +45,21 @@ async function getPosts(){
 }
 
 async function getAllPostsOfTheUser(email){
-  try {
-    let posts = User.getAllPostsOfTheUser(email);
-  } catch (err) {
-      throw new UserNotFound();
-  }
-    if(posts)
+  try{
+    let user = await getUser(email);
+    let posts = await user.getAllPostsOfTheUser();
+    console.log(posts);
+    if(posts.posts)
       return posts;
-    throw new UserDoesNotHaveAPost();
+     throw new UserDoesNotHaveAPost();
+  }
+ catch (err) {
+    if(err.message == new UserDoesNotHaveAPost().message)
+      throw new UserDoesNotHaveAPost();
+    throw new UserNotFound();
+   }
 }
+
 async function getRecentPosts(){
   return Post.getRecentPosts();
 }
