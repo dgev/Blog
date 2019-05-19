@@ -54,7 +54,7 @@ module.exports = {
   getPosts,
   getAllPostsOfTheUser,
   getRecentPosts,
-  getPostByID
+  getPostByID,
   deletePost,
   updatePostTitle,
   updatePostDescription
