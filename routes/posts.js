@@ -71,38 +71,28 @@ router.get('/postByID', async function(req, res, next) {
 })
 
 router.post('/deletePost', async function(req, res, next) {
+console.log(req.body._id);
 
   try {
   //  console.log(req.body);
-    await deletePost(req.body._id);
+    await deletePost(req.body.email, req.body._id);
     res.status(200).end();
   } catch (err) {
     next(err);
   }
 })
 
-router.post('/updateTitle', async function(req, res, next) {
+router.post('/updateTitleDesciption', async function(req, res, next) {
 
   try {
   //  console.log(req.body);
     await updatePostTitle(req.body._id, req.body.title);
-    res.status(200).end();
-  } catch (err) {
-    next(err);
-  }
-})
-
-router.post('/updateDescription', async function(req, res, next) {
-
-  try {
-  //  console.log(req.body);
     await updatePostDescription(req.body._id, req.body.description);
     res.status(200).end();
   } catch (err) {
     next(err);
   }
 })
-
 
 
 module.exports = router;
