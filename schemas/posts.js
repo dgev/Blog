@@ -19,7 +19,6 @@ PostSchema.statics.addPost = function(title, description) {
     description: description,
     date: new Date()
   });
-    //console.log(post);
     post.save();
     return post;
 }

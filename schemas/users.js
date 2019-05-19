@@ -7,24 +7,24 @@ const Post = require('./posts.js');
 const UserSchema = new mongoose.Schema({
   firstName: {
     type: String,
-    required: [true, 'Name is required!'],
+    required: true,
     trim: true
   },
   lastName: {
     type: String,
-    required: [true, 'Lastname is required!'],
+    required: true,
     trim: true
   },
   email: {
     type: String,
     lowercase: true,
     unique: true,
-    required: [true, 'Email is required!'],
+    required: true,
     trim: true
   },
   password: {
     type: String,
-    required: [true, 'Password is required!']
+    required: true
   },
   failedLoginCount: Number,
   locked: Number,
@@ -98,7 +98,7 @@ UserSchema.statics.deleteLoginCount = function(user) {
   });
 }
 
-UserSchema.statics.getAllPostsOfTheUser = function(email) {
+UserSchema.methods.getAllPostsOfTheUser = function(email) {
   return User.findOne({
     email: email
   }).populate('posts');
@@ -115,5 +115,6 @@ UserSchema.methods.updateForDeleteCreate = function(posts) {
 }
 
 const User = mongoose.model('User', UserSchema);
+
 
 module.exports = User;

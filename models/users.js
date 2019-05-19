@@ -1,4 +1,3 @@
-// Create your main application logic here.
 const path = process.cwd();
 const User = require(`${path}/schemas/users.js`);
 
@@ -7,7 +6,8 @@ const {
   UserAlreadyExists,
   PasswordIncorrect,
   ValidationError,
-  UserIsLocked
+  UserIsLocked,
+  FieldIsRequired
 } = require(`${path}/errors/errors.js`);
 
 const maximum_allowed_wrong_passwords = process.env.maximum_allowed_wrong_passwords || 3;
@@ -45,17 +45,13 @@ async function getUser(email) {
     throw new UserNotFound();
   }
   return user;
-
-  // Call corresponding schema function to retrieve the user and return the result.
-  // if the user is not found, throw UserNotFound error.
 }
 
 async function getAllUsers() {
-    return await User.getUsers({});
-  }
+  return await User.getUsers({});
+}
 
 async function createUser(body) {
-
   try {
     console.log(body.password);
 
@@ -75,11 +71,9 @@ async function createUser(body) {
     } else if (err.message.includes('duplicate key')) {
       throw new UserAlreadyExists();
     }
-    throw err;
+    if (err.message.includes('is required.'))
+      throw new FieldIsRequired();
   }
-  // Call corresponding schema function to create a user.
-  // If the user already exists mongoose should throw an error.
-  // Catch that error here and throw UserAlreadyExists error instead.
 }
 
 module.exports = {
