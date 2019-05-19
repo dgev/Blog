@@ -35,6 +35,7 @@ async function login(email, password) {
     }
     throw new PasswordIncorrect();
   }
+  await User.deleteLoginCount(user);
   return user;
 }
 
