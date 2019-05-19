@@ -178,4 +178,4 @@ $('#logout').click(function(e) {
     //     blog.appendChild(body);
     //     document.getElementById("personalBG").appendChild(blog);
     //   });
-    });
+    })};
