@@ -25,7 +25,7 @@ async function createPost(email, title, description) {
       }
       throw err;
     }
-}
+
 
 async function deletePost(email, post) {
     try{
