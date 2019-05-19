@@ -36,29 +36,30 @@ PostSchema.statics.getPostByID = function(id) {
   return Post.findOne({_id : id});
 }
 
-// PostSchema.statics.deletePost = function(post) {
-//   Post.findByIdAndRemove(post);
-// }
-//
-// PostSchema.statics.editPostTitle = function(post) {
-//   this.update({
-//     _id: post._id
-//   }, {
-//     title: this.title
-//   }, function(err, affected, resp) {
-//     console.log(affected);
-//   });
-// }
-//
-// PostSchema.statics.editPostDescription = function(post) {
-//   this.update({
-//     _id: post._id
-//   }, {
-//     title: this.description
-//   }, function(err, affected, resp) {
-//     console.log(affected);
-//   });
-// }
+PostSchema.statics.deleteThePost = function(id) {
+    Post.deleteMany({_id: id}, function(err, affected, resp) {
+      console.log(affected);
+    });
+}
+PostSchema.methods.updateTitle = function(title) {
+  Post.update({
+    _id: this._id
+  }, {
+    title: title
+  }, function(err, affected, resp) {
+    console.log(affected);
+  });
+}
+
+PostSchema.methods.updateDescription = function(description) {
+  Post.update({
+    _id: this._id
+  }, {
+    description: description
+  }, function(err, affected, resp) {
+    console.log(affected);
+  });
+}
 
 const Post = mongoose.model('Post', PostSchema);
 
