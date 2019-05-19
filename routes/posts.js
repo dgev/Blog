@@ -71,6 +71,7 @@ router.get('/postByID', async function(req, res, next) {
 })
 
 router.post('/deletePost', async function(req, res, next) {
+console.log(req.body._id);
 
   try {
   //  console.log(req.body);
