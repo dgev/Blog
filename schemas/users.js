@@ -99,11 +99,9 @@ UserSchema.statics.deleteLoginCount = function(user) {
 }
 
 UserSchema.methods.getAllPostsOfTheUser = function(email) {
-
-  let user = User.findOne({
+  return User.findOne({
     email: this.email
   }).populate('posts');
-  return user;
 }
 
 UserSchema.methods.updateForDeleteCreate = function(posts) {

@@ -48,7 +48,7 @@ async function getAllPostsOfTheUser(email){
   try{
     let user = await getUser(email);
     let posts = await user.getAllPostsOfTheUser();
-    console.log(posts);
+    console.log(posts.posts);
     if(posts.posts)
       return posts;
      throw new UserDoesNotHaveAPost();
