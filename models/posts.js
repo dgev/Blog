@@ -47,6 +47,7 @@ async function getPosts(){
 async function getAllPostsOfTheUser(email){
   try{
     let user = await getUser(email);
+    console.log(user);
     let posts = await user.getAllPostsOfTheUser();
     console.log(posts.posts);
     if(posts.posts)

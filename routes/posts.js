@@ -40,7 +40,7 @@ router.get('/postsByEmail', async function(req, res, next) {
 
   try{
 
-  res.send((await getAllPostsOfTheUser(req.body.email)));
+  res.send((await getAllPostsOfTheUser(req.query.email)).posts);
   res.status(200).end();
   }
   catch (err) {
@@ -86,8 +86,8 @@ router.post('/updateTitleDesciption', async function(req, res, next) {
 
   try {
   //  console.log(req.body);
-    await updatePostTitle(req.body._id, req.body.title);
-    await updatePostDescription(req.body._id, req.body.description);
+    await updatePostTitle(req.query._id, req.query.title);
+    await updatePostDescription(req.query._id, req.query.description);
     res.status(200).end();
   } catch (err) {
     next(err);
