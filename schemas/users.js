@@ -28,15 +28,10 @@ const UserSchema = new mongoose.Schema({
   },
   failedLoginCount: Number,
   locked: Number,
-  posts: [{type: 'ObjectId',
-    // validate: {
-    //     validator: function(v) {
-    //         return Post.findOne({_id: v});
-    //     },
-    //     message: 'invalid post id'
-    // },
+  posts: [{
+    type: 'ObjectId',
     ref: Post
-}]
+  }]
 });
 
 UserSchema.pre('save', function(next) {
@@ -66,12 +61,12 @@ UserSchema.methods.comparePassword = function(password) {
 }
 
 UserSchema.statics.ﬁndUserForLogin = function(email) {
-   return user = User.findOne({
+  return user = User.findOne({
     email: email
   }, {
     _id: false
   });
-  }
+}
 
 UserSchema.statics.lockUser = function(user) {
   User.update({
@@ -104,41 +99,19 @@ UserSchema.statics.deleteLoginCount = function(user) {
 }
 
 UserSchema.statics.getAllPostsOfTheUser = function(email) {
-  return User.findOne({email: email}).populate('posts');
+  return User.findOne({
+    email: email
+  }).populate('posts');
 }
 
-
-// UserSchema.statics.getAllPostsOfTheUser = function(user) {
-//   return User.findOne({email: user.email}).populate(posts);
-// }
-
-// UserSchema.statics.deleteUserPost = function(user, post, index) {
-//   User.findOneAndRemove({email: user}, (err, response) => {
-//     // note that if you have populated the Event documents to
-//     // the person documents, you have to extract the id from the
-//     // req.body.eventsAttended object
-//     Post.remove({_id: { $in: req.body.eventsAttended }}, (err, res) => {
-//        return
-//     })
-// })
-// delete user.posts[index]
-//   User.update({
-//     email: user.email
-//   }, {
-//     posts: user.posts
-//   }, function(err, affected, resp) {
-//     console.log(affected);
-//   });
-//}
 UserSchema.methods.updateForDeleteCreate = function(posts) {
   User.update({
-     email: this.email
-   },{
-     posts: posts
-   }, function(err, affected, resp) {
-     console.log(affected);
-   });
-  // console.log(user.posts)
+    email: this.email
+  }, {
+    posts: posts
+  }, function(err, affected, resp) {
+    console.log(affected);
+  });
 }
 
 const User = mongoose.model('User', UserSchema);
