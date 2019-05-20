@@ -72,23 +72,15 @@ async function getPostByID(id){
   return post;
 }
 
-
-async function updatePostTitle(id, title) {
+async function updatePost(id, title, description) {
   let post = await Post.getPostByID(id);
   if(!post)
     throw new PostDoesNotExist();
   if(!title)
     throw new FieldIsRequired();
-  post.updateTitle(title);
-  return post;
-}
-
-async function updatePostDescription(id, description) {
-  let post = await Post.getPostByID(id);
-  if(!post)
-    throw new PostDoesNotExist();
   if(!description)
     throw new FieldIsRequired();
+  post.updateTitle(title)
   post.updateDescription(description);
   return post;
 }
@@ -104,3 +96,4 @@ module.exports = {
   updatePostTitle,
   updatePostDescription
 }
+
