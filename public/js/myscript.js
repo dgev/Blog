@@ -4,6 +4,18 @@
  //let personal_posts = new Array();
  console.log(email);
 
+ function Recent(){
+  $.get("/postsRecent", {}, function(data) {
+    console.log('I am here');
+    
+    for(i = 1; i<=3; i++){
+        document.getElementById('read'+i).href = data[i-1]._id;
+        document.getElementById('post_'+i).innerHTML = data[i-1].title;
+        document.getElementById('p'+i).innerHTML = (data[i-1].description.trim().length>100 ? data[i-1].description.substr(0,200)+'...': data[i-1].description);    
+      }
+    });
+ };
+
 if (email) {
  // Set name, lastaname to page
 $.get("/UserByEmail", {email}, function(data) {
@@ -14,21 +26,17 @@ $.get("/UserByEmail", {email}, function(data) {
 
 // Get last three recent Posts
 
-$.get("/postsRecent", {}, function(data) {
-  for(i = 1; i<=3; i++){
-    document.getElementById('read'+i).href = data[i-1]._id;
-    document.getElementById('post_'+i).innerHTML = data[i-1].title;
-    document.getElementById('p'+i).innerHTML = (data[i-1].description.trim().length>100
-    ? data[i-1].description.substr(0,200)+'...': data[i-1].description)
-  }
-});
+Recent();
 
 
 // Get personal posts of a user
-
-$.get("/postsByEmail", {email}, function(data) {
-  data.forEach(function(element) {
+function loading(element){
+ 
+// $.get("/postsByEmail", {email}, function(data) {
+//   data.forEach(function(element) {
       let blog = document.createElement("DIV");
+      let blog_body = document.createElement("DIV");
+      let blog_buttons = document.createElement("DIV");
       let title = document.createElement("H3");
       let body = document.createElement("P");
       let button = document.createElement("button");
@@ -45,6 +53,8 @@ $.get("/postsByEmail", {email}, function(data) {
      button.setAttribute("class", "btn btn-primary btn-outline-primary btn-block");
      updateButton.setAttribute("class", "btn btn-primary btn-outline-primary btn-block");
       blog.setAttribute("id", element._id + 0);
+      blog_body.setAttribute("id", element._id + "body");
+      blog_buttons.setAttribute("id", element._id + "buttons");
       title.setAttribute("id", element._id + 1);
       body.setAttribute("id", element._id + 2);
      button.setAttribute("id", element._id);
@@ -61,96 +71,97 @@ $.get("/postsByEmail", {email}, function(data) {
             button.parentNode.removeChild(button);
 
        };
-      // updateButton.onclick = function Update(){
-      //   let length = this.id.length;
-      //   let _id = this.id.substr(1,length-1);
-      //   let blog = document.getElementById(_id+0);
-      //   let title = document.getElementById(_id+1);
-      //   let body = document.getElementById(_id+2);
-      //   let button = document.getElementById("u"+_id);
-      //   let input = document.createElement("input");
-      //   input.type = "text";
-      //   input.style. marginTop = '50px';
-      //   input.setAttribute("id", "updateTitle");
-      //   input.className = "label";
-      //   let textarea = document.createElement("textarea");
-      //   textarea.setAttribute("id", "updateBody");
-      //   textarea.setAttribute("cols", "30");
-      //   textarea.setAttribute("rows", "10");
-      //   textarea.className = "form-control";
-      //   input.value = title.textContent;
-      //   textarea.innerHTML = body.textContent;
-      //   title.parentNode.removeChild(title);
-      //   body.parentNode.removeChild(body);
-      //   button.parentNode.removeChild(button);
+      updateButton.onclick = function Update(){
+        let length = this.id.length;
+        let _id = this.id.substr(1,length-1);
+        let blog = document.getElementById(_id+0);
+        let blog_title = document.getElementById(_id+1);
+        let body = document.getElementById(_id+2);
+        let button = document.getElementById(_id);
+        let updateB = document.getElementById("u"+_id);
+        let input = document.createElement("input");
+        input.type = "text";
+        input.style. marginTop = '50px';
+        input.setAttribute("id", "updateTitle");
+        input.className = "label";
+        let textarea = document.createElement("textarea");
+        textarea.setAttribute("id", "updateBody");
+        textarea.setAttribute("cols", "30");
+        textarea.setAttribute("rows", "10");
+        textarea.className = "form-control";
+        input.value = title.textContent;
+        textarea.innerHTML = body.textContent;
+        body.parentNode.removeChild(body);
+        blog_title.parentNode.removeChild(blog_title);
+       // document.getElementById("u"+_id).style.visibility = 'hidden';
+        //document.getElementById(_id).style.visibility = 'hidden';
+        updateB.parentNode.removeChild(updateB);
+        button.parentNode.removeChild(button);
 
-        // let div1 = document.createElement("DIV");
-        // div1.className = "row mb-4";
-        // let div2 = document.createElement("DIV");
-        // div2.className = "form-group col-md-4";
-        // let div3 = document.createElement("DIV");
-        // div3.className = "form-field-icon-wrap";
-        // let div4 = document.createElement("DIV");
-        // div4.className = "form-group col-md-12";
-        // div4.appendChild(textarea);
-        // div3.appendChild(input);
-        // div2.appendChild(div3);
-        // div1.appendChild(div2);
-        // div1.appendChild(div4);
-        // blog.appendChild(div1);
-        // let submitButton = document.createElement("button");
-
-        // submitButton.innerHTML = "Submit";
-        // submitButton.style.width = '200px';
-        // submitButton.setAttribute("class", "btn btn-primary btn-outline-primary btn-block");
-        // submitButton.setAttribute("id", "submit_update");
-        // blog.appendChild(submitButton);
-      //  submitButton.onclick = function Submit(){
-      //       const title = $('#updateTitle').val();
-      //       const description = $('#updateBody').val();
-
-    //          $.post("/posts", { email, title, description},  function(data) {
-    //            document.getElementById("user_email").textContent;
-    //            $('#title').val();
-    //            $('#message').val();
-    //          });
-    //              let blog = document.createElement("DIV");
-    //              let blog_title = document.createElement("H3");
-    //              let body = document.createElement("P");
-    //              let button = document.createElement("button");
-    //              blog_title.style. marginTop = '100px';
-    //              blog_title.style. marginBottom = '50px';
-    //              body.style. marginBottom = '50px';
-    //              button.style.width = '200px';
-    //              button.innerHTML = "Delete";
-    //              button.setAttribute("class", "btn btn-primary btn-outline-primary btn-block" + "delete");
-    //              button.setAttribute("id", element._id);
-    //              blog_title.innerHTML = title;
-    //             body.innerHTML = description;
-    //             blog.appendChild(blog_title);
-    //             blog.appendChild(body);
-    //             blog.appendChild(button);
-    //             document.getElementById("personalBG").appendChild(blog);
-    //         $('#title').val('');
-    //         $('#message').val('');
-    //         $.get("/postsRecent", {}, function(data) {
-    //         for(i = 1; i<=3; i++){
-    //             document.getElementById('read'+i).href = data[i-1]._id;
-    //             document.getElementById('post_'+i).innerHTML = data[i-1].title;
-    //             document.getElementById('p'+i).innerHTML = (data[i-1].description.trim().length>100 ? data[i-1].description.substr(0,200)+'...': data[i-1].description)
-    //           }
-    //     })
-      blog.appendChild(title);
-      blog.appendChild(body);
-      blog.appendChild(button);
-      blog.appendChild(updateButton);
+        let div1 = document.createElement("DIV");
+        div1.className = "row mb-4";
+        let div2 = document.createElement("DIV");
+        div2.className = "form-group col-md-4";
+        let div3 = document.createElement("DIV");
+        div3.className = "form-field-icon-wrap";
+        let div4 = document.createElement("DIV");
+        div4.className = "form-group col-md-12";
+        div4.appendChild(textarea);
+        div3.appendChild(input);
+        div2.appendChild(div3);
+        div1.appendChild(div2);
+        div1.appendChild(div4);
+        blog.appendChild(div1);
+        let submitButton = document.createElement("button");
+        submitButton.innerHTML = "Submit";
+        submitButton.style.width = '200px';
+        submitButton.setAttribute("class", "btn btn-primary btn-outline-primary btn-block");
+        submitButton.setAttribute("id", "s");
+        blog.appendChild(submitButton);
+        $('#s').click(function(e) {
+          console.log('in submit');
+         
+          e.preventDefault();
+          const title = $('#updateTitle').val();
+          const description = $('#updateBody').val();
+           $.post('/updateTitleDesciption', { _id, title, description},  function(data) {
+            
+             $('#updateTitle').val();
+             $('#updateBody').val();
+           });
+             div1.parentNode.removeChild(div1);
+             submitButton.parentNode.removeChild(submitButton);
+             blog_title.innerHTML = title;
+             body.innerHTML = description;
+             blog_body.appendChild(blog_title);
+             blog_body.appendChild(body);
+             blog_buttons.appendChild(button);
+             blog_buttons.appendChild(updateB);
+             blog.appendChild(blog_body);
+             blog.appendChild(blog_buttons);
+             //setTimeout(Recent(), 3000)
+             Recent();
+          });
+        };
+      blog_body.appendChild(title);
+      blog_body.appendChild(body);
+      blog_buttons.appendChild(button);
+      blog_buttons.appendChild(updateButton);
+      blog.appendChild(blog_body);
+      blog.appendChild(blog_buttons);
       document.getElementById("personalBG").appendChild(blog);
-    // };
-
-//    };
-});
-});
+      }
+          $.get("/postsByEmail", {email}, function(data) {
+            data.forEach(function(element) {
+              loading(element);
+            });
+          });
 };
+
+
+
+
+
 
 $('#lg').click(function(e) {
   e.preventDefault();
@@ -250,30 +261,14 @@ $('#logout').click(function(e) {
       $('#title').val();
       $('#message').val();
     });
-        let blog = document.createElement("DIV");
-        let blog_title = document.createElement("H3");
-        let body = document.createElement("P");
-        let button = document.createElement("button");
-        blog_title.style. marginTop = '100px';
-        blog_title.style. marginBottom = '50px';
-        body.style. marginBottom = '50px';
-        button.style.width = '200px';
-        button.innerHTML = "Delete";
-        button.setAttribute("class", "btn btn-primary btn-outline-primary btn-block" + "delete");
-        //button.setAttribute("id", element._id);
-        blog_title.innerHTML = title;
-        body.innerHTML = description;
-        blog.appendChild(blog_title);
-        blog.appendChild(body);
-        blog.appendChild(button);
-        document.getElementById("personalBG").appendChild(blog);
-    $('#title').val('');
-    $('#message').val('');
-    $.get("/postsRecent", {}, function(data) {
-    for(i = 1; i<=3; i++){
-        document.getElementById('read'+i).href = data[i-1]._id;
-        document.getElementById('post_'+i).innerHTML = data[i-1].title;
-        document.getElementById('p'+i).innerHTML = (data[i-1].description.trim().length>100 ? data[i-1].description.substr(0,200)+'...': data[i-1].description)
+    $.get("/postsByEmail", {email}, function(data) {
+    data.forEach(function(element) {
+      if(element.title === title && element.description === description ){
+        loading(element);        
       }
     });
+  });
+    $('#title').val('');
+    $('#message').val('');
+    Recent();
   });

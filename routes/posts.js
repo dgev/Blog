@@ -85,9 +85,8 @@ console.log(req.body._id);
 router.post('/updateTitleDesciption', async function(req, res, next) {
 
   try {
-  //  console.log(req.body);
-    await updatePostTitle(req.query._id, req.query.title);
-    await updatePostDescription(req.query._id, req.query.description);
+    await updatePostTitle(req.body._id, req.body.title);
+    await updatePostDescription(req.body._id, req.body.description);
     res.status(200).end();
   } catch (err) {
     next(err);
