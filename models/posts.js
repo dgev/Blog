@@ -73,10 +73,6 @@ async function getPostByID(id){
 }
 
 async function updatePostTitle(id, title) {
-  console.log(id);
-  console.log(title);
-  
-  
   (await Post.getPostByID(id)).updateTitle(title);
 }
 
