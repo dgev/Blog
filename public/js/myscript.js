@@ -215,6 +215,10 @@ console.log(window.location.pathname);
 
  if (location.pathname === "/login.html" || location.pathname === "/")
       location.pathname = "/index.html";
+<<<<<<< HEAD
+=======
+      //document.open('index.html', '_self', '');
+>>>>>>> b2f747914d8719d5e86463e4860c2be80b933a13
 
 setTimeout(function(){ localStorage.setItem("email", ""); }, 60*60*1000);
  };
@@ -250,7 +254,11 @@ $('#lg').click(function(e) {
 /*! Fades out the whole page when clicking links */
 $('#logout').click(function(e) {
   e.preventDefault();
+<<<<<<< HEAD
   localStorage.setItem("email", "");
+=======
+  localStorage.removeItem("email");
+>>>>>>> b2f747914d8719d5e86463e4860c2be80b933a13
   Clear();
   newLocation = this.href;
   $('body').fadeOut('slow', newpage);
