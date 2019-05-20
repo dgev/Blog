@@ -1,4 +1,5 @@
 let email = sessionStorage.getItem("email");
+//let recent_id = new Array();
 //let personal_posts = new Array();
 console.log(email);
 
@@ -7,7 +8,7 @@ function Recent() {
     console.log('I am here');
 
     for (i = 1; i <= 3; i++) {
-      document.getElementById('read' + i).href = data[i - 1]._id;
+      //recent_id[i-1] = data[i - 1]._id;
       document.getElementById('post_' + i).innerHTML = data[i - 1].title;
       document.getElementById('p' + i).innerHTML = (data[i - 1].description.trim().length > 100 ? data[i - 1].description.substr(0, 200) + '...' : data[i - 1].description);
     }
@@ -28,41 +29,37 @@ if (email) {
 
   Recent();
 
-  $('#read1').click(function(e) {
-    e.preventDefault();
-    length = this.href.length;
-    id = this.href.substr(22, length - 1);
-    readMore(id);
-  })
-
-  $('#read2').click(function(e) {
-    e.preventDefault();
-    length = this.href.length;
-    id = this.href.substr(22, length - 1);
-    readMore(id);
-  })
-
-  $('#read3').click(function(e) {
-    e.preventDefault();
-    length = this.href.length;
-    id = this.href.substr(22, length - 1);
-    readMore(id);
-  })
-
-
-  function readMore(_id) {
-
-    $.get("/postByID", {
-      _id
-    }, function(data) {
-        let newWin = window.open('post.html')
-        newWin.onload = function() {
-        let ident = newWin.document.getElementById('heading');
-        ident.innerHTML = data.title;
-        newWin.document.getElementById('text').append(`${data.description}`);
-      };
-    });
-  };
+  // $('#read1').click(function(e) {
+  //   e.preventDefault();
+  //   getid();
+  //   read1();
+  // })
+  //
+  // $('#read2').click(function(e) {
+  //   e.preventDefault();
+  //   getid();
+  //   read2();
+  // })
+  //
+  // $('#read3').click(function(e) {
+  //   getid();
+  //   read3();
+  // })
+  //
+  //
+  // function readMore(_id) {
+  //
+  //   $.get("/postByID", {
+  //     _id
+  //   }, function(data) {
+  //       let newWin = window.open('post.html')
+  //       newWin.onload = function() {
+  //       let ident = newWin.document.getElementById('heading');
+  //       ident.innerHTML = data.title;
+  //       newWin.document.getElementById('text').append(`${data.description}`);
+  //     };
+  //   });
+  // };
 
   // Get personal posts of a user
   function loading(element) {
@@ -211,7 +208,7 @@ $('#lg').click(function(e) {
   const email = $('#logEmail').val();
   const password = $('#logPassword').val();
 
-  //  let personal_posts = new Array();
+
   sessionStorage.setItem("email", email);
   newpage = this.href;
 

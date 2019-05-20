@@ -41,6 +41,10 @@ app.get('/post.html', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'pages/post.html'))
 })
 
+app.get('/allPosts.html', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'pages/allPosts.html'))
+})
+
  const Post = require('./schemas/posts.js');
 
 const post1 = new Post({
