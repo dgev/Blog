@@ -81,8 +81,8 @@ router.post('/deletePost', async function(req, res, next) {
 router.post('/updateTitleDesciption', async function(req, res, next) {
 
   try {
-    await updatePostTitle(req.body._id, req.body.title);
-    await updatePostDescription(req.body._id, req.body.description);
+    res.send(await updatePostTitle(req.body._id, req.body.title));
+    res.send(await updatePostDescription(req.body._id, req.body.description));
     res.status(200).end();
   } catch (err) {
     next(err);

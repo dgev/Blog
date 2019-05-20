@@ -265,6 +265,10 @@ $('#signupForm').submit(function(event) {
   const lastName = $('#lastname').val();
   const email = $('#userEmail').val();
   const password = $('#userPassword').val();
+  if(!name !! !lastName || !email || !password){
+      alert("All fields are requred!!! :)")
+      return;
+    }
   $.post("/users", {
     name,
     lastName,
@@ -294,7 +298,7 @@ $('#create').click(function(event) {
     document.getElementById("user_email").textContent;
     $('#title').val();
     $('#message').val();
-    if(title.length != 0 && description.length != 0){    
+    if(title.length != 0 && description.length != 0){
       loading(data);
       }
       else{

@@ -79,15 +79,17 @@ async function updatePostTitle(id, title) {
   if(!title)
     throw new FieldIsRequired();
   post.updateTitle(title);
+  return post;
 }
 
 async function updatePostDescription(id, description) {
   let post = await Post.getPostByID(id);
   if(!post)
     throw new PostDoesNotExist();
-  if(!title)
+  if(!description)
     throw new FieldIsRequired();
   post.updateDescription(description);
+  return post;
 }
 
 
