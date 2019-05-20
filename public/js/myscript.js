@@ -205,12 +205,21 @@ if (email) {
       loading(element);
     });
   });
+<<<<<<< HEAD
 console.log(window.location.pathname);
  if (location.pathname === "/login.html" || location.pathname === "/")
       location.pathname = "/index.html";
       //document.open('index.html', '_self', '');
+=======
+// console.log                 
+//  if (window.location.pathname === "/login.html" || window.location.pathname === "/")
+//  document.open('index.html', '_self', '');
+//   // || $.get("/")){
+//     //  window.open('index.html', '_self', '');
+//   //}
+>>>>>>> 56f2d63a4db4f001faa36f90367a7166bf13757e
 
-};
+ };
 
 
 
@@ -231,11 +240,11 @@ $('#lg').click(function(e) {
     email,
     password
   }, function(data) {
-    let newWin = window.open(newpage)
-    window.open('login.html', '_self', '');
-    window.close();
-    newWin.onload();
-
+    //let newWin = window.open(newpage)
+    //window.open('login.html', '_self', '');
+    //window.close();
+    //newWin.onload();
+    document.open('index.html', '_self', '');
   });
 });
 
@@ -243,7 +252,12 @@ $('#lg').click(function(e) {
 /*! Fades out the whole page when clicking links */
 $('#logout').click(function(e) {
   e.preventDefault();
+<<<<<<< HEAD
   localStorage.setItem("email", "");
+=======
+  sessionStorage.setItem("email", "");
+  Clear();
+>>>>>>> 56f2d63a4db4f001faa36f90367a7166bf13757e
   newLocation = this.href;
   $('body').fadeOut('slow', newpage);
 });
