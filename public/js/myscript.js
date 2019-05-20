@@ -1,4 +1,4 @@
-let email = sessionStorage.getItem("email");
+let email = localStorage.getItem("email");
 function Clear(){
 localStorage.removeItem("recent_body");
 localStorage.removeItem("begin");
@@ -206,11 +206,9 @@ if (email) {
     });
   });
 console.log(window.location.pathname);
- if (window.location.pathname === "/login.html" || window.location.pathname === "/")
-    alert("Already loged in try /index.html");
-  // || $.get("/")){
-    //  window.open('index.html', '_self', '');
-  //}
+ if (location.pathname === "/login.html" || location.pathname === "/")
+      location.pathname = "/index.html";
+      //document.open('index.html', '_self', '');
 
 };
 
@@ -225,7 +223,7 @@ $('#lg').click(function(e) {
   const password = $('#logPassword').val();
 
 
-  sessionStorage.setItem("email", email);
+  localStorage.setItem("email", email);
   newpage = this.href;
 
 
@@ -245,7 +243,7 @@ $('#lg').click(function(e) {
 /*! Fades out the whole page when clicking links */
 $('#logout').click(function(e) {
   e.preventDefault();
-  sessionStorage.setItem("email", "");
+  localStorage.setItem("email", "");
   newLocation = this.href;
   $('body').fadeOut('slow', newpage);
 });
