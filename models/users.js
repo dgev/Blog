@@ -41,7 +41,7 @@ async function login(email, password) {
 
 async function getUser(email) {
   const user = await User.getUserByEmail(email);
-  if (user.length === 0 || user === null) {
+  if (!user) {
     throw new UserNotFound();
   }
   return user;

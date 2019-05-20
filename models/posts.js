@@ -13,17 +13,28 @@ PostDoesNotExist
 } = require(`${path}/errors/errors.js`);
 
 async function createPost(email, title, description) {
+  console.log(description);
   try{
-     let user = await getUser(email);
-     let post = await Post.addPost(title, description);
+     let user = await User.getUserByEmail(email);
+     console.log(user);
+     if(!user)
+      throw new UserNotFound();
+     let post =  await new Post({
+     title: title,
+     description: description,
+     date: new Date()
+      });
+     await post.save();
+     console.log(post);
      user.posts.push({_id: post._id});
      await user.updateForDeleteCreate(user.posts);
      return post;
    }
     catch(err){
-     if (err.message.includes('is required.'))
+      if (err.message.includes('is required.'))
        throw new FieldIsRequired();
-      throw err;
+      if (err.message === new UserNotFound().message)
+        throw new UserNotFound();
     }
 }
 
@@ -46,6 +57,7 @@ async function getPosts(){
 async function getAllPostsOfTheUser(email){
   try{
     let user = await getUser(email);
+    console.log(user);
     let posts = await user.getAllPostsOfTheUser();
     if(posts.posts)
       return posts;

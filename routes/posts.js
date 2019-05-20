@@ -40,7 +40,7 @@ router.get('/postsByEmail', async function(req, res, next) {
 
   try{
 
-  res.send((await getAllPostsOfTheUser(req.query.email)).posts);
+  res.send((await getAllPostsOfTheUser(req.body.email)).posts);
   res.status(200).end();
   }
   catch (err) {

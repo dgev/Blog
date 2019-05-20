@@ -97,28 +97,57 @@ const post2 = new Post({
 
 app.use(function(err, req, res, next) {
     if (err.message === new UserNotFound().message) {
-      res.status(404).send(new UserNotFound().message);
-    } else if (err.message === new PasswordIncorrect().message) {
-      res.status(401).send(new PasswordIncorrect().message)
-    } else if (err.message === new ValidationError().message) {
-      res.status(400).send(new ValidationError().message)
-    } else if (err.message === new UserAlreadyExists().message) {
-      res.status(409).send(new UserAlreadyExists().message)
-    } else if (err.message === new UserIsLocked().message) {
-      res.status(423).send(new UserIsLocked().message)
-    } else if (err.message === new UserDoesNotHaveAPost().message) {
-      res.status(404).send(new UserDoesNotHaveAPost().message)
-    } else if (err.message === new FieldIsRequired().message) {
-      res.status(400).send(new FieldIsRequired().message)
-    } else if (err.message === new PostDoesNotExist().message) {
-      res.status(404).send(new PostDoesNotExist().message)
+      res.send(new UserNotFound().message);
+      res.status(404).end();
+    } if (err.message === new PasswordIncorrect().message) {
+      res.send(new PasswordIncorrect().message)
+      res.status(401).end();
+    }  if (err.message === new ValidationError().message) {
+      res.send(new ValidationError().message)
+      res.status(400).end();
+    }  if (err.message === new UserAlreadyExists().message) {
+      res.send(new UserAlreadyExists().message)
+      res.status(409).end();
+    }  if (err.message === new UserIsLocked().message) {
+      res.send(new UserIsLocked().message)
+      res.status(423).end();
+    }  if (err.message === new UserDoesNotHaveAPost().message) {
+      res.send(new UserDoesNotHaveAPost().message)
+      res.status(404).end();
+    }  if (err.message === new FieldIsRequired().message) {
+      res.send(new FieldIsRequired().message)
+      res.status(400).end();
+    }  if (err.message === new PostDoesNotExist().message) {
+      res.send(new PostDoesNotExist().message)
+      res.status(404).end();
     }
-    res.status(500).send('Something went wrong');
     console.error(err.stack)
     res.status(500).end();
+
+      // if(err.message === new UserNotFound().message){
+      //   res.status(404).send(err.message);
+      //   }
+      // if(err.message === new UserIsLocked().message){
+      //   res.status(423).send(err.message);
+      //   }
+      // if(err.message === new UserAlreadyExists().message){
+      //   res.status(409).send(err.message);
+      //   }
+      // if(err.message === new PasswordIncorrect().message){
+      //   res.status(401).send(err.message);
+      // }
+      // if(err.message === new ValidationError().message){
+      //   res.status(400).send(err.message);
+      // }
+      // console.error(err.stack);
+      // res.status(500).end();
+
   })
 
 
+  app.use(function(req, res, next) {
+      res.status(404).send('page was not found!!');
+  })
 
 
 
