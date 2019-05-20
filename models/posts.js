@@ -15,11 +15,12 @@ PostDoesNotExist
 async function createPost(email, title, description) {
   try{
      let user = await getUser(email);
-     console.log(user);
+    // console.log(user);
      let post = await Post.addPost(title, description);
-     console.log(post);
+     //console.log(post);
      user.posts.push({_id: post._id});
      await user.updateForDeleteCreate(user.posts);
+     return post;
    }
     catch(err){
      if (err.message.includes('is required.'))

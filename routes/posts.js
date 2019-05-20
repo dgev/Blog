@@ -19,7 +19,7 @@ const {
 router.post('/posts', async function(req, res, next) {
 
   try {
-    await createPost(req.body.email, req.body.title, req.body.description);
+    res.send(await createPost(req.body.email, req.body.title, req.body.description));
     res.status(200).end();
   } catch (err) {
     next(err);

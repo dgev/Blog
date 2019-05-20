@@ -10,12 +10,17 @@ $("#signup").click(function() {
     });
     });
 
-    $("#create").click(function() {
-      $("#section-contact").fadeOut("fast", function() {
-      $("#section-contact").fadeIn("fast");
-        });
-      });
-
+    $("#sign").click(function() {
+    $("#second").fadeOut("fast", function() {
+    $("#first").fadeIn("fast");
+    });
+    });
+    // $("#create").click(function() {
+    //   $("#section-contact").fadeOut("fast", function() {
+    //   $("#section-contact").fadeIn("fast");
+    //     });
+    //   });
+    //
     //          $(function() {
     //            $("form[name='login']").validate({
     //              rules: {
