@@ -39,15 +39,12 @@ async function createPost(email, title, description) {
 }
 
 async function deletePost(email, post) {
-    try{
-      let user = await getUser(email);
+      let user = await User.getUserByEmail(email);
+      if(!user)
+       throw new UserNotFound();
       user.posts.pull(post);
       await user.updateForDeleteCreate(user.posts);
       await Post.deleteThePost(post);
-    }
-    catch(err){
-      throw err;
-    }
 }
 
 async function getPosts(){
@@ -55,19 +52,13 @@ async function getPosts(){
 }
 
 async function getAllPostsOfTheUser(email){
-  try{
-    let user = await getUser(email);
-    console.log(user);
+    let user = await User.getUserByEmail(email);
+    if(!user)
+     throw new UserNotFound();
     let posts = await user.getAllPostsOfTheUser();
     if(posts.posts)
       return posts;
-     throw new UserDoesNotHaveAPost();
-  }
- catch (err) {
-    if(err.message == new UserDoesNotHaveAPost().message)
-      throw new UserDoesNotHaveAPost();
-    throw new UserNotFound();
-   }
+    throw new UserDoesNotHaveAPost();
 }
 
 async function getRecentPosts(){
@@ -82,11 +73,21 @@ async function getPostByID(id){
 }
 
 async function updatePostTitle(id, title) {
-  (await Post.getPostByID(id)).updateTitle(title);
+  let post = await Post.getPostByID(id);
+  if(!post)
+    throw new PostDoesNotExist();
+  if(!title)
+    throw new FieldIsRequired();
+  post.updateTitle(title);
 }
 
 async function updatePostDescription(id, description) {
-  (await Post.getPostByID(id)).updateDescription(description);
+  let post = await Post.getPostByID(id);
+  if(!post)
+    throw new PostDoesNotExist();
+  if(!title)
+    throw new FieldIsRequired();
+  post.updateDescription(description);
 }
 
 

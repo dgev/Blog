@@ -33,8 +33,8 @@ router.get('/users', async function(req, res, next) {
 
 router.get('/UserByEmail', async function(req, res, next) {
   try {
-    console.log(req.body.email);
-    const user = await getUser(req.body.email);
+    console.log(req.query.email);
+    const user = await getUser(req.query.email);
     res.json(user);
     res.status(200).end();
   } catch (err) {
