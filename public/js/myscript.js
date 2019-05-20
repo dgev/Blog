@@ -1,22 +1,23 @@
 let email = localStorage.getItem("email");
-function Clear(){
-localStorage.removeItem("recent_body");
-localStorage.removeItem("begin");
-localStorage.removeItem("recent_title");
+
+function Clear() {
+  localStorage.removeItem("recent_body");
+  localStorage.removeItem("begin");
+  localStorage.removeItem("recent_title");
 };
 
 function Recent() {
   $.get("/postsRecent", {}, function(data) {
     for (i = 1; i <= 3; i++) {
-      document.getElementById('read'+i).href = data[i-1]._id;
+      document.getElementById('read' + i).href = data[i - 1]._id;
       document.getElementById('post_' + i).innerHTML = data[i - 1].title;
       document.getElementById('p' + i).innerHTML = (data[i - 1].description.trim().length > 100 ? data[i - 1].description.substr(0, 200) + '...' : data[i - 1].description);
     }
   });
 };
-if(!email){
-if (location.pathname === "/index.html")
-     location.pathname = "/";
+if (!email) {
+  if (location.pathname === "/index.html" || location.pathname === "/post.html" || location.pathname === "/allPosts.html")
+    location.pathname = "/";
 }
 
 if (email) {
@@ -37,7 +38,7 @@ if (email) {
     e.preventDefault();
     Clear();
     length = this.href.length;
-    id = this.href.substr(22,length-1);
+    id = this.href.substr(22, length - 1);
     await readMore(id);
   })
 
@@ -45,7 +46,7 @@ if (email) {
     Clear();
     e.preventDefault();
     length = this.href.length;
-    id = this.href.substr(22,length-1);
+    id = this.href.substr(22, length - 1);
     readMore(id);
   })
 
@@ -53,26 +54,28 @@ if (email) {
     Clear();
     e.preventDefault();
     length = this.href.length;
-    id = this.href.substr(22,length-1);
+    id = this.href.substr(22, length - 1);
     readMore(id);
   })
 
 
   async function readMore(_id) {
 
-  $.get("/postByID", {_id}, function(data) {
+    $.get("/postByID", {
+      _id
+    }, function(data) {
       let newWin = window.open('post.html')
-      newWin.onload = function(){
-      let recent_title = data.title;
-      let recent_body = data.description;
-      let ident = newWin.document.getElementById('heading');
-      ident.innerHTML = recent_title;
-      newWin.document.getElementById('text').append(`${recent_body}`);
-      localStorage.setItem("begin", '');
-      localStorage.setItem("recent_title", recent_title);
-      localStorage.setItem("recent_body", recent_body);
+      newWin.onload = function() {
+        let recent_title = data.title;
+        let recent_body = data.description;
+        let ident = newWin.document.getElementById('heading');
+        ident.innerHTML = recent_title;
+        newWin.document.getElementById('text').append(`${recent_body}`);
+        localStorage.setItem("begin", '');
+        localStorage.setItem("recent_title", recent_title);
+        localStorage.setItem("recent_body", recent_body);
       };
-  });
+    });
   }
 
   // Get personal posts of a user
@@ -203,10 +206,14 @@ if (email) {
       loading(element);
     });
   });
-if (location.pathname === "/login.html" || location.pathname === "/")
-      location.pathname = "/index.html";
-setTimeout(function(){ localStorage.setItem("email", ""); }, 60*60*1000);
- };
+
+  if (location.pathname === "/login.html" || location.pathname === "/")
+    location.pathname = "/index.html";
+
+  setTimeout(function() {
+    localStorage.setItem("email", "");
+  }, 60 * 60 * 1000);
+};
 
 $('#lg').click(function(e) {
   e.preventDefault();
