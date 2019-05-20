@@ -13,16 +13,6 @@ const PostSchema = new mongoose.Schema({
     date: Date
 });
 
-PostSchema.statics.addPost = function(title, description) {
-    let post = new Post({
-    title: title,
-    description: description,
-    date: new Date()
-  });
-    post.save();
-    return post;
-}
-
 PostSchema.statics.getAllPosts = function() {
   return Post.find({});
 }
