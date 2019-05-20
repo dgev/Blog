@@ -16,6 +16,7 @@ function Recent() {
 };
 
 if (email) {
+  console.log(email);
   // Set name, lastaname to page
   $.get("/UserByEmail", {
     email
@@ -33,39 +34,39 @@ if (email) {
     e.preventDefault();
     Clear();
     length = this.href.length;
-    id = this.href.substr(22,length-1);  
+    id = this.href.substr(22,length-1);
     await readMore(id);
   })
-  
+
   $('#read2').click(function(e) {
     Clear();
     e.preventDefault();
     length = this.href.length;
-    id = this.href.substr(22,length-1);  
+    id = this.href.substr(22,length-1);
     readMore(id);
   })
-  
+
   $('#read3').click(function(e) {
     Clear();
     e.preventDefault();
     length = this.href.length;
-    id = this.href.substr(22,length-1);  
+    id = this.href.substr(22,length-1);
     readMore(id);
   })
-  
-  
-  async function readMore(_id) { 
-  
+
+
+  async function readMore(_id) {
+
   $.get("/postByID", {_id}, function(data) {
       let newWin = window.open('post.html')
-      newWin.onload = function(){ 
-      let recent_title = data.title; 
+      newWin.onload = function(){
+      let recent_title = data.title;
       let recent_body = data.description;
       //let begin = 0;
       //console.log(recent_title);
-      
+
       let ident = newWin.document.getElementById('heading');
-      ident.innerHTML = recent_title; 
+      ident.innerHTML = recent_title;
       newWin.document.getElementById('text').append(`${recent_body}`);
       localStorage.setItem("begin", '');
       localStorage.setItem("recent_title", recent_title);
@@ -73,7 +74,7 @@ if (email) {
       };
   });
   }
- 
+
   // Get personal posts of a user
   function loading(element) {
 
@@ -204,6 +205,13 @@ if (email) {
       loading(element);
     });
   });
+console.log(window.location.pathname);
+ if (window.location.pathname === "/login.html" || window.location.pathname === "/")
+    alert("Already loged in try /index.html");
+  // || $.get("/")){
+    //  window.open('index.html', '_self', '');
+  //}
+
 };
 
 
@@ -229,6 +237,7 @@ $('#lg').click(function(e) {
     window.open('login.html', '_self', '');
     window.close();
     newWin.onload();
+
   });
 });
 
