@@ -1,15 +1,14 @@
 let email = sessionStorage.getItem("email");
-let id_number = sessionStorage.getItem("id_number");
-//let recent_id = new Array();
-//let personal_posts = new Array();
-console.log(email);
+function Clear(){
+localStorage.removeItem("recent_body");
+localStorage.removeItem("begin");
+localStorage.removeItem("recent_title");
+};
 
 function Recent() {
   $.get("/postsRecent", {}, function(data) {
-    console.log('I am here');
-
     for (i = 1; i <= 3; i++) {
-      //recent_id[i-1] = data[i - 1]._id;
+      document.getElementById('read'+i).href = data[i-1]._id;
       document.getElementById('post_' + i).innerHTML = data[i - 1].title;
       document.getElementById('p' + i).innerHTML = (data[i - 1].description.trim().length > 100 ? data[i - 1].description.substr(0, 200) + '...' : data[i - 1].description);
     }
@@ -30,46 +29,54 @@ if (email) {
 
   Recent();
 
-  $('#read1').click(function(e) {
+  $('#read1').click(async function(e) {
     e.preventDefault();
-    // getid();
-    // read1();
-    id_number = 0;
+    Clear();
+    length = this.href.length;
+    id = this.href.substr(22,length-1);  
+    await readMore(id);
   })
   
   $('#read2').click(function(e) {
+    Clear();
     e.preventDefault();
-    // getid();
-    // read2();
-    id_number=1;
+    length = this.href.length;
+    id = this.href.substr(22,length-1);  
+    readMore(id);
   })
   
   $('#read3').click(function(e) {
-    // getid();
-    // read3();
-    id_number=2;
+    Clear();
+    e.preventDefault();
+    length = this.href.length;
+    id = this.href.substr(22,length-1);  
+    readMore(id);
   })
-  //
-  //
-  // function readMore(_id) {
-  //
-  //   $.get("/postByID", {
-  //     _id
-  //   }, function(data) {
-  //       let newWin = window.open('post.html')
-  //       newWin.onload = function() {
-  //       let ident = newWin.document.getElementById('heading');
-  //       ident.innerHTML = data.title;
-  //       newWin.document.getElementById('text').append(`${data.description}`);
-  //     };
-  //   });
-  // };
-
+  
+  
+  async function readMore(_id) { 
+  
+  $.get("/postByID", {_id}, function(data) {
+      let newWin = window.open('post.html')
+      newWin.onload = function(){ 
+      let recent_title = data.title; 
+      let recent_body = data.description;
+      //let begin = 0;
+      //console.log(recent_title);
+      
+      let ident = newWin.document.getElementById('heading');
+      ident.innerHTML = recent_title; 
+      newWin.document.getElementById('text').append(`${recent_body}`);
+      localStorage.setItem("begin", '');
+      localStorage.setItem("recent_title", recent_title);
+      localStorage.setItem("recent_body", recent_body);
+      };
+  });
+  }
+ 
   // Get personal posts of a user
   function loading(element) {
 
-    // $.get("/postsByEmail", {email}, function(data) {
-    //   data.forEach(function(element) {
     let blog = document.createElement("DIV");
     let blog_body = document.createElement("DIV");
     let blog_buttons = document.createElement("DIV");
@@ -131,8 +138,6 @@ if (email) {
       textarea.innerHTML = body.textContent;
       body.parentNode.removeChild(body);
       blog_title.parentNode.removeChild(blog_title);
-      // document.getElementById("u"+_id).style.visibility = 'hidden';
-      //document.getElementById(_id).style.visibility = 'hidden';
       updateB.parentNode.removeChild(updateB);
       button.parentNode.removeChild(button);
 
@@ -181,7 +186,6 @@ if (email) {
         blog_buttons.appendChild(updateB);
         blog.appendChild(blog_body);
         blog.appendChild(blog_buttons);
-        //setTimeout(Recent(), 3000)
         Recent();
       });
     };
@@ -287,16 +291,6 @@ $('#create').click(function(event) {
     console.log(data);
     loading(data);
   });
-  //$.pos("/postsByEmail", {
-    //email
-  //}, function(data) {
-
-    // data.forEach(function(element) {
-    //   if (element.title === title && element.description === description) {
-    //     loading(element);
-    //   }
-    // });
-//  });
 
   $('#title').val('');
   $('#message').val('');
