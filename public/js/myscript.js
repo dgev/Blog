@@ -68,9 +68,6 @@ if (email) {
       newWin.onload = function(){
       let recent_title = data.title;
       let recent_body = data.description;
-      //let begin = 0;
-      //console.log(recent_title);
-
       let ident = newWin.document.getElementById('heading');
       ident.innerHTML = recent_title;
       newWin.document.getElementById('text').append(`${recent_body}`);
@@ -238,10 +235,6 @@ $('#lg').click(function(e) {
     email,
     password
   }, function(data) {
-    //let newWin = window.open(newpage)
-    //window.open('login.html', '_self', '');
-    //window.close();
-    //newWin.onload();
     document.open('index.html', '_self', '');
   });
 });
