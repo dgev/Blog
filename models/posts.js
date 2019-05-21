@@ -80,6 +80,7 @@ async function updatePostTitle(id, title) {
   if(!title)
     throw new FieldIsRequired();
   post.updateTitle(title);
+  return post;
 }
 
 async function updatePostDescription(id, description) {
@@ -89,6 +90,7 @@ async function updatePostDescription(id, description) {
   if(!description)
     throw new FieldIsRequired();
   post.updateDescription(description);
+  return post;
 }
 
 
