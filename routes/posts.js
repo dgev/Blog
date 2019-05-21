@@ -12,8 +12,7 @@ const {
   getAllPostsOfTheUser,
   getRecentPosts,
   getPostByID,
-  updatePostTitle,
-  updatePostDescription
+  updatePost
 } = require(`${path}/models/posts.js`);
 
 router.post('/posts', async function(req, res, next) {

@@ -177,7 +177,7 @@ if (email) {
 
           $('#updateTitle').val();
           $('#updateBody').val();
-        });
+        // });
         if(title.length != 0 || description.length != 0){
         div1.parentNode.removeChild(div1);
         submitButton.parentNode.removeChild(submitButton);
@@ -194,6 +194,7 @@ if (email) {
         else{
           alert('Title or Description cannot be empty :)')
         }
+      });
       });
     };
     blog_body.appendChild(title);
