@@ -202,9 +202,12 @@ if (email) {
   $.get("/postsByEmail", {
     email
   }, function(data) {
-    data.forEach(function(element) {
-      loading(element);
-    });
+    if(data.length != 0){
+      // $("#personalBG").empty();
+     data.forEach(function(element) {
+       loading(element);
+     });
+   }
   });
 
   if (location.pathname === "/login.html" || location.pathname === "/")
@@ -286,7 +289,12 @@ $('#create').click(function(event) {
     document.getElementById("user_email").textContent;
     $('#title').val();
     $('#message').val();
-    loading(data);
+    if(data.title.length != 0 && data.description.length != 0){    
+      loading(data);
+      }
+      else{
+        alert('Title and Description cannot be empty !!!')
+      }
   });
 
   $('#title').val('');
