@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -r ./init.js index.js",
-    "test": "nyc mocha functions.test.js"
+    "start": "nodemon -r ./init.js index.js"
   },
   "keywords": [],
   "author": "",
@@ -14,13 +13,9 @@
     "express": "^4.16.4",
     "dotenv": "^7.0.0",
     "mongoose": "^5.4.20",
-    "multer": "^1.4.1",
-    "pbkdf2": "^3.0.17",
-    "socket.io": "^2.2.0"
+    "pbkdf2": "^3.0.17"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^6.1.4",
     "nodemon": "^1.18.11"
   }
 }
