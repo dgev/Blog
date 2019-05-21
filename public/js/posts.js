@@ -1,7 +1,10 @@
 let recent_id = new Array();
 //let personal_posts = new Array();
+//console.log(email);
+    //if(id_number+1)
+{
 
-async function getid(){
+function getid(){
   $.get("/postsRecent", {}, function(data) {
     //console.log('recent_id');
     for (i = 0; i <= 2; i++) {
@@ -9,21 +12,8 @@ async function getid(){
       console.log(recent_id[i]);
         }
   });
-};
-
-  function read1() {
-    console.log(recent_id[0]);
-    readMore(recent_id[0]);
-  };
-
-  function read2() {
-    //e.preventDefault();
-    readMore(recent_id[1]);
-  };
-
-  function read3() {
-    //e.preventDefault();
-    readMore(recent_id[2]);
+}; 
+    readMore(recent_id[id_number]);
   };
 
 

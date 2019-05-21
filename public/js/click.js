@@ -1,16 +1,16 @@
-$('#read1').click(async function(e) {
+$('#read1').click(function(e) {
   e.preventDefault();
-  await getid();
+  getid();
   read1();
 })
 
-$('#read2').click(async function(e) {
+$('#read2').click(function(e) {
   e.preventDefault();
-  await getid();
+  getid();
   read2();
 })
 
-$('#read3').click(async function(e) {
-  await getid();
+$('#read3').click(function(e) {
+  getid();
   read3();
 })

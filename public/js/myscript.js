@@ -1,4 +1,5 @@
 let email = sessionStorage.getItem("email");
+let id_number = sessionStorage.getItem("id_number");
 //let recent_id = new Array();
 //let personal_posts = new Array();
 console.log(email);
@@ -29,22 +30,25 @@ if (email) {
 
   Recent();
 
-  // $('#read1').click(function(e) {
-  //   e.preventDefault();
-  //   getid();
-  //   read1();
-  // })
-  //
-  // $('#read2').click(function(e) {
-  //   e.preventDefault();
-  //   getid();
-  //   read2();
-  // })
-  //
-  // $('#read3').click(function(e) {
-  //   getid();
-  //   read3();
-  // })
+  $('#read1').click(function(e) {
+    e.preventDefault();
+    // getid();
+    // read1();
+    id_number = 0;
+  })
+  
+  $('#read2').click(function(e) {
+    e.preventDefault();
+    // getid();
+    // read2();
+    id_number=1;
+  })
+  
+  $('#read3').click(function(e) {
+    // getid();
+    // read3();
+    id_number=2;
+  })
   //
   //
   // function readMore(_id) {
