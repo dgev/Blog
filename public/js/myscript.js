@@ -226,16 +226,22 @@ if (email) {
 
 $('#lg').click(function(e) {
   e.preventDefault();
-  const email = $('#logEmail').val();
-  const password = $('#logPassword').val();
-  localStorage.setItem("email", email);
+  let email = $('#logEmail').val();
+  let password = $('#logPassword').val();
+  //localStorage.setItem("email", email);
   newpage = this.href;
 
   $.get("/login", {
     email,
     password
   }, function(data) {
+    if(data.email === email){
+    localStorage.setItem("email", email);
     document.open('index.html', '_self', '');
+    }
+    else{
+      alert('Email or password are incorrect !!!');
+    }
   });
 });
 
