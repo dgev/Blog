@@ -17,12 +17,9 @@ function Recent() {
 if(!email){
 if (location.pathname === "/index.html")
      location.pathname = "/";
-
 }
 
-
 if (email) {
-  console.log(email);
   // Set name, lastaname to page
   $.get("/UserByEmail", {
     email
@@ -166,8 +163,6 @@ if (email) {
       submitButton.setAttribute("id", "s");
       blog.appendChild(submitButton);
       $('#s').click(function(e) {
-        console.log('in submit');
-
         e.preventDefault();
         const title = $('#updateTitle').val();
         const description = $('#updateBody').val();
@@ -208,28 +203,17 @@ if (email) {
       loading(element);
     });
   });
-console.log(window.location.pathname);
-
- if (location.pathname === "/login.html" || location.pathname === "/")
+if (location.pathname === "/login.html" || location.pathname === "/")
       location.pathname = "/index.html";
-
 setTimeout(function(){ localStorage.setItem("email", ""); }, 60*60*1000);
  };
-
-
-
-
-
 
 $('#lg').click(function(e) {
   e.preventDefault();
   const email = $('#logEmail').val();
   const password = $('#logPassword').val();
-
-
   localStorage.setItem("email", email);
   newpage = this.href;
-
 
   $.get("/login", {
     email,
@@ -243,9 +227,7 @@ $('#lg').click(function(e) {
 /*! Fades out the whole page when clicking links */
 $('#logout').click(function(e) {
   e.preventDefault();
-
   localStorage.setItem("email", "");
-
   Clear();
   newLocation = this.href;
   $('body').fadeOut('slow', newpage);
@@ -256,7 +238,6 @@ function newpage() {
 }
 
 $(document).ready(function() {
-
   /*! Fades in whole page on load */
   $('body').css('display', 'none');
   $('body').fadeIn(500);
@@ -298,7 +279,6 @@ $('#create').click(function(event) {
     document.getElementById("user_email").textContent;
     $('#title').val();
     $('#message').val();
-    console.log(data);
     loading(data);
   });
 
