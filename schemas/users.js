@@ -40,9 +40,7 @@ UserSchema.pre('save', function(next) {
 });
 
 UserSchema.statics.getUserByEmail = function(email) {
-  console.log(email);
-
-  return User.findOne({
+ return User.findOne({
     email
   }, {
     password: false

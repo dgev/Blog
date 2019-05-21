@@ -59,9 +59,7 @@ router.get('/postsRecent', async function(req, res, next) {
 })
 
 router.get('/postByID', async function(req, res, next) {
-    console.log((req.query._id));
-
-  try{
+ try{
   res.send(await getPostByID(req.query._id));
   res.status(200).end();
   }
@@ -71,11 +69,9 @@ router.get('/postByID', async function(req, res, next) {
 })
 
 router.post('/deletePost', async function(req, res, next) {
-console.log(req.body._id);
 
   try {
-  //  console.log(req.body);
-    await deletePost(req.body.email, req.body._id);
+   await deletePost(req.body.email, req.body._id);
     res.status(200).end();
   } catch (err) {
     next(err);

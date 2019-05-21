@@ -53,9 +53,7 @@ async function getAllUsers() {
 
 async function createUser(body) {
   try {
-    console.log(body.password);
-
-    const user = await new User({
+      const user = await new User({
       email: body.email,
       firstName: body.name,
       lastName: body.lastName,

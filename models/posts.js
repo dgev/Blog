@@ -15,9 +15,7 @@ PostDoesNotExist
 async function createPost(email, title, description) {
   try{
      let user = await getUser(email);
-    // console.log(user);
      let post = await Post.addPost(title, description);
-     //console.log(post);
      user.posts.push({_id: post._id});
      await user.updateForDeleteCreate(user.posts);
      return post;
@@ -48,9 +46,7 @@ async function getPosts(){
 async function getAllPostsOfTheUser(email){
   try{
     let user = await getUser(email);
-    console.log(user);
     let posts = await user.getAllPostsOfTheUser();
-    console.log(posts.posts);
     if(posts.posts)
       return posts;
      throw new UserDoesNotHaveAPost();

@@ -37,7 +37,6 @@ router.get('/UserByEmail', async function(req, res, next) {
     res.json(user);
     res.status(200).end();
   } catch (err) {
-    console.log(err.message);
     next(err);
   }
 })
