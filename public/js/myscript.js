@@ -265,10 +265,10 @@ $('#signupForm').submit(function(event) {
   const lastName = $('#lastname').val();
   const email = $('#userEmail').val();
   const password = $('#userPassword').val();
-  if(!name !! !lastName || !email || !password){
-      alert("All fields are requred!!! :)")
-      return;
-    }
+  // if(!name !! !lastName || !email || !password){
+  //     alert("All fields are requred!!! :)")
+  //     return;
+  //   }
   $.post("/users", {
     name,
     lastName,
