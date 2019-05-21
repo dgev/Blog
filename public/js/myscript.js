@@ -205,14 +205,14 @@ if (email) {
       loading(element);
     });
   });
-console.log(window.location.pathname);
- if (window.location.pathname === "/login.html" || window.location.pathname === "/")
-    alert("Already loged in try /index.html");
-  // || $.get("/")){
-    //  window.open('index.html', '_self', '');
-  //}
+// console.log                 
+//  if (window.location.pathname === "/login.html" || window.location.pathname === "/")
+//  document.open('index.html', '_self', '');
+//   // || $.get("/")){
+//     //  window.open('index.html', '_self', '');
+//   //}
 
-};
+ };
 
 
 
@@ -233,11 +233,11 @@ $('#lg').click(function(e) {
     email,
     password
   }, function(data) {
-    let newWin = window.open(newpage)
-    window.open('login.html', '_self', '');
-    window.close();
-    newWin.onload();
-
+    //let newWin = window.open(newpage)
+    //window.open('login.html', '_self', '');
+    //window.close();
+    //newWin.onload();
+    document.open('index.html', '_self', '');
   });
 });
 
