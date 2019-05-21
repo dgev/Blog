@@ -237,6 +237,7 @@ $('#lg').click(function(e) {
 $('#logout').click(function(e) {
   e.preventDefault();
   sessionStorage.setItem("email", "");
+  Clear();
   newLocation = this.href;
   $('body').fadeOut('slow', newpage);
 });
