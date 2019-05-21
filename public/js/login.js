@@ -15,15 +15,19 @@ $("#sign").click(function() {
   const lastName = $('#lastname').val();
   const email = $('#userEmail').val();
   const password = $('#userPassword').val();
-  if(!name || !lastName || !email || !password){
-    alert("All fields are required to input :)");
+  $.get("/UserByEmail", {
+    email
+  }, function(data) {
+    if(data.email === email){
+      alert("Account with this email already exists");
+    }
+    else if(!name || !lastName || !email || !password){
+      alert("All fields are required to input :)");
+    }
+    else{
+    $("#second").fadeOut("fast", function() {
+      $("#first").fadeIn("fast");
+    });
   }
-  else if (){
-    alert("Account with this email already exists");
-  }
-  else{
-  $("#second").fadeOut("fast", function() {
-    $("#first").fadeIn("fast");
   });
-}
 });
