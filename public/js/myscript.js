@@ -178,9 +178,10 @@ if (email) {
           $('#updateTitle').val();
           $('#updateBody').val();
         });
-        if(title.length != 0 && description.length != 0){
+        if(title.length != 0 || description.length != 0){
         div1.parentNode.removeChild(div1);
         submitButton.parentNode.removeChild(submitButton);
+        (title.length != 0 ? 
         blog_title.innerHTML = title;
         body.innerHTML = description;
         blog_body.appendChild(blog_title);
@@ -191,8 +192,9 @@ if (email) {
         blog.appendChild(blog_buttons);
         Recent();
         }
+      }
         else{
-          alert('Title and Description cannot be empty :)')
+          alert('Title or Description cannot be empty :)')
         }
       });
     };

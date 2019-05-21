@@ -72,6 +72,7 @@ async function getPostByID(id){
   return post;
 }
 
+
 async function updatePostTitle(id, title) {
   let post = await Post.getPostByID(id);
   if(!post)
@@ -85,7 +86,7 @@ async function updatePostDescription(id, description) {
   let post = await Post.getPostByID(id);
   if(!post)
     throw new PostDoesNotExist();
-  if(!title)
+  if(!description)
     throw new FieldIsRequired();
   post.updateDescription(description);
 }
