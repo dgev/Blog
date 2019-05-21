@@ -294,7 +294,7 @@ $('#create').click(function(event) {
     document.getElementById("user_email").textContent;
     $('#title').val();
     $('#message').val();
-    if(data.title.length != 0 && data.description.length != 0){    
+    if(title.length != 0 && description.length != 0){    
       loading(data);
       }
       else{
