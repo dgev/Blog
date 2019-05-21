@@ -178,6 +178,7 @@ if (email) {
           $('#updateTitle').val();
           $('#updateBody').val();
         });
+        if(title.length != 0 && description.length != 0){
         div1.parentNode.removeChild(div1);
         submitButton.parentNode.removeChild(submitButton);
         blog_title.innerHTML = title;
@@ -189,6 +190,10 @@ if (email) {
         blog.appendChild(blog_body);
         blog.appendChild(blog_buttons);
         Recent();
+        }
+        else{
+          alert('Title and Description cannot be empty :)')
+        }
       });
     };
     blog_body.appendChild(title);
