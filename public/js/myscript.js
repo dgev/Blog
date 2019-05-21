@@ -181,9 +181,8 @@ if (email) {
         if(title.length != 0 || description.length != 0){
         div1.parentNode.removeChild(div1);
         submitButton.parentNode.removeChild(submitButton);
-        (title.length != 0 ? 
-        blog_title.innerHTML = title;
-        body.innerHTML = description;
+        blog_title.innerHTML = (title.length != 0 ?  title : data.title);
+        body.innerHTML = (description.length != 0 ? description : data.description);
         blog_body.appendChild(blog_title);
         blog_body.appendChild(body);
         blog_buttons.appendChild(button);
@@ -192,7 +191,6 @@ if (email) {
         blog.appendChild(blog_buttons);
         Recent();
         }
-      }
         else{
           alert('Title or Description cannot be empty :)')
         }
