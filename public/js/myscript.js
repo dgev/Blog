@@ -210,7 +210,7 @@ if (email) {
   }, function(data) {
     if(data.length != 0){
       // $("#personalBG").empty();
-     data.forEach(function(element) {
+     data.forEach(element => {
        loading(element);
      });
    }
